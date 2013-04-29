@@ -11,11 +11,8 @@ public class Street {
 	private final String name;
 	private final int price;
 	private final int[] rent;
-	private final int mortgageValue;
-	private final int houseCost;
 	private final Group colorGroup;
 	
-	private boolean mortgage;
 	private State state;
 
 	public String getName() {
@@ -31,11 +28,11 @@ public class Street {
 	}
 
 	public int getMortgageValue() {
-		return mortgageValue;
+		return price / 2;
 	}
 
 	public int getHouseCost() {
-		return houseCost;
+		return this.colorGroup.getHouseCost();
 	}
 
 	public Group getColorGroup() {
@@ -46,7 +43,7 @@ public class Street {
 	 * @return the mortgage
 	 */
 	public boolean getMortgage() {
-		return mortgage;
+		return this.state == State.MORTGAGED;
 	}
 
 	/**
@@ -56,20 +53,16 @@ public class Street {
 		return state;
 	}
 
-	private Street(String name, int price, int[] rent, 
-			int mortgageValue, int houseCost,
-			Group colorGroup) {
+	private Street(String name, int price, int[] rent, Group colorGroup) {
 		this.name = name; this.price = price; this.rent = rent;
-		this.mortgageValue = mortgageValue; this.houseCost = houseCost;
 		this.colorGroup = colorGroup;
 		
-		this.mortgage = false;
 		this.state = State.UNOWNED;
 	}
 	
 	public static Street makeBaltic() {
 		return new Street("Baltic Avenue", 60, new int[] {0, 4, 20, 60, 180, 320, 450},
-				30, 50, Group.SADDLEBROWN);
+				Group.SADDLEBROWN);
 	}
 	
 	public String toString() {
@@ -108,10 +101,6 @@ public class Street {
 	 * @return the amount of rent.
 	 */
 	public int calculateRent() {
-		if (this.mortgage) {
-			return 0;
-		} else {
-			return rent[this.state.ordinal()];
-		}
+		return rent[this.state.getRentIndex()];
 	}
 }
