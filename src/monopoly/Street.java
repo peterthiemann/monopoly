@@ -3,18 +3,28 @@
  */
 package monopoly;
 
+import java.util.List;
+
 /**
  * @author thiemann
  *
  */
-public class Street {
+public class Street implements IProperty, IField {
 	private final String name;
 	private final int price;
 	private final int[] rent;
 	private final Group colorGroup;
 	
 	private State state;
+	
+	/**
+	 * null as long as state == UNOWNED
+	 * not null otherwise
+	 */
+	private Player owner;
 
+	////////
+	
 	public String getName() {
 		return name;
 	}
@@ -73,9 +83,11 @@ public class Street {
 	 * Buy this street.
 	 * @return true if buying the street was successful.
 	 */
-	public boolean buy() {
-		if (State.UNOWNED.equals(this.state)) {
+	public boolean buy(Player p) {
+		if (State.UNOWNED.equals(this.state) && p.pay(this.price)) {
 			this.state = State.OWNED;
+			this.owner = p;
+			p.addProperty(this);
 			return true;
 		} else {
 			return false;
@@ -101,6 +113,29 @@ public class Street {
 	 * @return the amount of rent.
 	 */
 	public int calculateRent() {
-		return rent[this.state.getRentIndex()];
+		int amount = rent[this.state.getRentIndex()];
+		if (owner != null && owner.ownsAllInGroup(this.colorGroup)) {
+			amount *= 2;
+		}
+		return amount;
+	}
+
+	@Override
+	public boolean inColorGroup(Group colorGroup) {
+		return this.getColorGroup() == colorGroup;
+	}
+
+	@Override
+	public IAction action(List<Player> players, int current, IDice dice) {
+		Player p = players.get(current);
+		if (this.state == State.UNOWNED) {
+			// offer to buy the street
+			return new BuyAction(p, this);
+		} else {
+			// pay rent
+			int amount = (p == this.owner) ? 0 : this.calculateRent();
+			return new PayToAction(p, this.owner, amount);
+		}
+		return null;
 	}
 }

@@ -1,8 +1,8 @@
 package monopoly;
 
 public enum State {
-	UNOWNED(0), MORTGAGED(0), OWNED(0),
-	ONEHOUSE(1), TWOHOUSES(2), THREEHOUSES(3), FOURHOUSES(4), HOTEL(5); 
+	UNOWNED(0), MORTGAGED(0), OWNED(1),
+	ONEHOUSE(2), TWOHOUSES(3), THREEHOUSES(4), FOURHOUSES(5), HOTEL(6); 
 	
 	private final int rentIndex;
 	private State (int rentIndex) {
