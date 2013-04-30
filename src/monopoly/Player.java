@@ -7,28 +7,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author adpult
+ * @author thiemann
  *
  */
 public class Player {
-	
-	public final static int START_POSITION = 0;
-	public final static int START_CASH = 1500;
-	
 	private final String name;
 	private int position;
 	private int cash;
 	private Collection<IProperty> ownedProperty;
 	private Collection<IActionCard> cards;
-	private boolean inJail;
+	
+	public JailState jailState;
 	
 	public Player(String name) {
 		this.name = name;
-		this.position = START_POSITION;
-		this.cash = START_CASH;
+		this.position = Constants.START_POSITION;
+		this.cash = Constants.START_CASH;
 		this.ownedProperty = new ArrayList<IProperty>();
 		this.cards = new ArrayList<IActionCard>();
-		this.inJail = false;
+		this.jailState = JailState.FREE;
 	}
 
 	/**
@@ -70,14 +67,14 @@ public class Player {
 	 * @return the inJail
 	 */
 	public boolean isInJail() {
-		return inJail;
+		return this.jailState != JailState.FREE;
 	}
 
 	/**
 	 * @param inJail the inJail to set
 	 */
-	public void setInJail(boolean inJail) {
-		this.inJail = inJail;
+	public void gotoJail() {
+		this.jailState = JailState.INJAIL;
 	}
 
 	public void addProperty(IProperty prop) {

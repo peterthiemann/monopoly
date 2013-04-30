@@ -3,7 +3,7 @@
  */
 package monopoly;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * @author thiemann
@@ -126,16 +126,19 @@ public class Street implements IProperty, IField {
 	}
 
 	@Override
-	public IAction action(List<Player> players, int current, IDice dice) {
-		Player p = players.get(current);
+	public IAction action(Player current, Collection<Player> others, IDice dice) {
 		if (this.state == State.UNOWNED) {
 			// offer to buy the street
-			return new BuyAction(p, this);
+			return new BuyAction("Buy " + this.name + " for $" + this.price , current, this);
 		} else {
 			// pay rent
-			int amount = (p == this.owner) ? 0 : this.calculateRent();
-			return new PayToAction(p, this.owner, amount);
+			if (current == this.owner) {
+				return null;
+			} else {
+				int amount = this.calculateRent();
+				return new PayToAction("Pay $" + amount + " rent for " + this.name + " to " + owner.getName(),
+						current, this.owner, amount);
+			}
 		}
-		return null;
 	}
 }

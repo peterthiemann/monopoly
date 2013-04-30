@@ -1,15 +1,17 @@
 package monopoly;
 
 public class PayToAction implements IAction {
-	public final Player current;
-	public final Player target;
-	public final int amount;
-	public PayToAction(Player current, Player target, int amount) {
-		this.current = current; this.target = target; this.amount = amount;
+	private final String description;
+	private final Player current;
+	private final Player target;
+	private final int amount;
+	
+	public PayToAction(String description, Player current, Player target, int amount) {
+		this.description = description; this.current = current; this.target = target; this.amount = amount;
 	}
 	
 	public String getDescription() {
-		return "Pay " + amount + " to " + target.getName();
+		return description;
 	}
 	
 	public boolean execute() {

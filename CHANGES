@@ -1,0 +1,5 @@
+* Game: Player[], int -> Queue<Player>, Player
+* IField: correspondingly
+* IAction: new method getDescription
+* Constants: new class for all game relevant constants
+* Player: needs to remember the number of turns in jail
