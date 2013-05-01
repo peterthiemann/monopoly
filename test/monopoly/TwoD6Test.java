@@ -36,6 +36,10 @@ public class TwoD6Test {
     }
   }
 
+  /**
+   * Checks if, when isDoubles() reports true, the total amount rolled is
+   * divisible by two.
+   */
   @Test
   public void testIsDoubles() {
     TwoD6 d = new TwoD6();
