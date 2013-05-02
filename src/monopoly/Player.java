@@ -5,6 +5,7 @@ package monopoly;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * @author thiemann
@@ -16,6 +17,7 @@ public class Player {
 	private int cash;
 	private Collection<IProperty> ownedProperty;
 	private Collection<IActionCard> cards;
+	private Collection<IAction> pending;
 	
 	public JailState jailState;
 	
@@ -25,6 +27,7 @@ public class Player {
 		this.cash = Constants.START_CASH;
 		this.ownedProperty = new ArrayList<IProperty>();
 		this.cards = new ArrayList<IActionCard>();
+		this.pending = Collections.emptyList();
 		this.jailState = JailState.FREE;
 	}
 
@@ -107,6 +110,22 @@ public class Player {
 			}
 		}
 		return count == colorGroup.getNrInGroup();
+	}
+
+	public int advance(int value) {
+		int newPosition = this.position + value;
+		if (newPosition >= Constants.BOARD_SIZE) {
+			this.earn(200);
+			newPosition -= Constants.BOARD_SIZE;
+		}
+		this.position = newPosition;
+		return newPosition;
+	}
+
+	public void register(IAction currentAction) {
+		if (currentAction != null) {
+			this.pending.add(currentAction);
+		}
 	}
 
 }

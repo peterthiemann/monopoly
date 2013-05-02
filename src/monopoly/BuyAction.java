@@ -27,4 +27,15 @@ public class BuyAction implements IAction {
 	public boolean execute() {
 		return street.buy(buyer);
 	}
+
+	@Override
+	public boolean alternative() {
+		// rejection to buy leads to an auction in the real game
+		return true;
+	}
+
+	@Override
+	public boolean isImmediate() {
+		return false;
+	}
 }

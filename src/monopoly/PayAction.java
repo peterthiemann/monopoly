@@ -15,4 +15,12 @@ public class PayAction implements IAction {
 	public boolean execute() {
 		return current.pay(amount);
 	}
+	@Override
+	public boolean alternative() {
+		return false;
+	}
+	@Override
+	public boolean isImmediate() {
+		return false;
+	}
 }

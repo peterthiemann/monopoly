@@ -21,4 +21,14 @@ public class PayToAction implements IAction {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean alternative() {
+		return false;
+	}
+
+	@Override
+	public boolean isImmediate() {
+		return false;
+	}
 }
