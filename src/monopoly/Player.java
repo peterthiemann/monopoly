@@ -109,4 +109,13 @@ public class Player {
 		return count == colorGroup.getNrInGroup();
 	}
 
+	public boolean anyMortgaged(Group group) {
+		for (IProperty prop : this.ownedProperty) {
+			if (prop.inColorGroup(group) && prop.isMortgaged()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

@@ -52,7 +52,7 @@ public class Street implements IProperty, IField {
 	/**
 	 * @return the mortgage
 	 */
-	public boolean getMortgage() {
+	public boolean isMortgaged() {
 		return this.state == State.MORTGAGED;
 	}
 
@@ -70,9 +70,12 @@ public class Street implements IProperty, IField {
 		this.state = State.UNOWNED;
 	}
 	
+	public static Street makeMediterranian() {
+		return new Street("Mediterranian Avenue", 60, new int[] {0, 2, 10, 30, 90, 160, 250}, Group.SADDLEBROWN);
+	}
+	
 	public static Street makeBaltic() {
-		return new Street("Baltic Avenue", 60, new int[] {0, 4, 20, 60, 180, 320, 450},
-				Group.SADDLEBROWN);
+		return new Street("Baltic Avenue", 60, new int[] {0, 4, 20, 60, 180, 320, 450},	Group.SADDLEBROWN);
 	}
 	
 	public String toString() {
@@ -95,11 +98,43 @@ public class Street implements IProperty, IField {
 	}
 
 	/**
+	 * Try to mortgage this property.
+	 * @return true if mortgage has been obtained on this street
+	 */
+	public boolean obtainMortgage() {
+		if (this.state == State.OWNED) {
+			this.owner.earn(this.getMortgageValue());
+			this.state = State.MORTGAGED;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean releaseMortgage() {
+		if (this.state == State.MORTGAGED && this.owner.pay(this.getMortgageReleaseAmount())) {
+			this.state = State.OWNED;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private int getMortgageReleaseAmount() {
+		int amount = this.getMortgageValue();
+		amount += amount / 10;
+		return amount;
+	}
+
+	/**
 	 * Buy a house or a hotel for this street.
+	 * Still lacks the check that houses must be build evenly.
 	 * @return true if buying the house or hotel was successful.
 	 */
 	public boolean buyHouse() {
 		if (this.state == State.UNOWNED || this.state == State.HOTEL) {
+			return false;
+		} else if (!this.owner.ownsAllInGroup(this.colorGroup) || this.owner.anyMortgaged(this.colorGroup)) {
 			return false;
 		} else {
 			int i = this.state.ordinal();
@@ -114,7 +149,7 @@ public class Street implements IProperty, IField {
 	 */
 	public int calculateRent() {
 		int amount = rent[this.state.getRentIndex()];
-		if (owner != null && owner.ownsAllInGroup(this.colorGroup)) {
+		if (this.state == State.OWNED && owner.ownsAllInGroup(this.colorGroup)) {
 			amount *= 2;
 		}
 		return amount;

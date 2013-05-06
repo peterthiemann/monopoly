@@ -22,7 +22,8 @@ public class Game {
 	private static IField[] initBoard() {
 		IField[] b = new IField[Constants.BOARD_SIZE];
 		b[00] = null; // GO!
-		b[01] = Street.makeBaltic();
+		b[01] = Street.makeMediterranian();
+		b[03] = Street.makeBaltic();
 		return b;
 	}
 

@@ -1,3 +1,11 @@
+* fixed Street.buyHouse(): Es kšnnen momentan HŠuser auf einer beliehenen Stra§e gebaut werden.
+* fixed Street.calculateRent(): Die Miete fŸr Stra§en mit HŠusern oder Hotel wird verdoppelt.
+* StreetTest: tests implemented for above bugs 
+* IProperty: new method isMortgaged
+* Street: new factory method Mediterranian Street
+* Street: new methods obtainMortgage, releaseMortgage
+* Player: new method anyMortgaged
+---------------------------------
 * Game: Player[], int -> Queue<Player>, Player
 * IField: correspondingly
 * IAction: new method getDescription
