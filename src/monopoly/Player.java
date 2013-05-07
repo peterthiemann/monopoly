@@ -70,9 +70,6 @@ public class Player {
 		return this.jailState != JailState.FREE;
 	}
 
-	/**
-	 * @param inJail the inJail to set
-	 */
 	public void gotoJail() {
 		this.jailState = JailState.INJAIL;
 	}
