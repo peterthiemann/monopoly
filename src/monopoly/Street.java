@@ -9,30 +9,16 @@ import java.util.Collection;
  * @author thiemann
  *
  */
-public class Street implements IProperty, IField {
-	private final String name;
-	private final int price;
-	private final int[] rent;
-	private final Group colorGroup;
+public class Street extends AProperty {
+	final int[] rent;
+	final Group colorGroup;
 	
-	private State state;
+	State state;
 	
-	/**
-	 * null as long as state == UNOWNED
-	 * not null otherwise
-	 */
-	private Player owner;
+	
 
 	////////
 	
-	public String getName() {
-		return name;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
 	public int[] getRent() {
 		return rent.clone();		// do not return the plain array!
 	}
@@ -64,7 +50,8 @@ public class Street implements IProperty, IField {
 	}
 
 	private Street(String name, int price, int[] rent, Group colorGroup) {
-		this.name = name; this.price = price; this.rent = rent;
+		super(name, price);
+		this.rent = rent;
 		this.colorGroup = colorGroup;
 		
 		this.state = State.UNOWNED;
@@ -80,21 +67,6 @@ public class Street implements IProperty, IField {
 	
 	public String toString() {
 		return this.name + " " + this.colorGroup;
-	}
-
-	/**
-	 * Buy this street.
-	 * @return true if buying the street was successful.
-	 */
-	public boolean buy(Player p) {
-		if (State.UNOWNED.equals(this.state) && p.pay(this.price)) {
-			this.state = State.OWNED;
-			this.owner = p;
-			p.addProperty(this);
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**
@@ -143,18 +115,6 @@ public class Street implements IProperty, IField {
 		}
 	}
 
-	/**
-	 * Calculate the rent that the owner can charge for this street.
-	 * @return the amount of rent.
-	 */
-	public int calculateRent() {
-		int amount = rent[this.state.getRentIndex()];
-		if (this.state == State.OWNED && owner.ownsAllInGroup(this.colorGroup)) {
-			amount *= 2;
-		}
-		return amount;
-	}
-
 	@Override
 	public boolean inColorGroup(Group colorGroup) {
 		return this.getColorGroup() == colorGroup;
@@ -175,5 +135,30 @@ public class Street implements IProperty, IField {
 						current, this.owner, amount);
 			}
 		}
+	}
+
+	@Override
+	protected boolean isOwned() {
+		return !State.UNOWNED.equals(this.state);
+	}
+
+	@Override
+	protected void setOwnedState() {
+		if(this.state == State.UNOWNED) {
+			this.state = State.OWNED;	
+		}				
+	}
+	
+	/**
+	 * Calculate the rent that the owner can charge for this street.
+	 * @return the amount of rent.
+	 */
+	@Override
+	public int calculateRent() {
+		int amount = rent[this.state.getRentIndex()];
+		if (this.state == State.OWNED && owner.ownsAllInGroup(this.colorGroup)) {
+			amount *= 2;
+		}
+		return amount;
 	}
 }

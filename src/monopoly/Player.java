@@ -115,4 +115,14 @@ public class Player {
 		return false;
 	}
 
+	public int countRailroads() {
+		int count = 0;
+		for (IProperty prop : this.ownedProperty) {
+			if (prop.isRailroad()) {
+				count++;
+			}
+		}
+		return count;
+	}
+
 }

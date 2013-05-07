@@ -1,6 +1,4 @@
-/**
- * 
- */
+/** * */
 package monopoly;
 
 /**
@@ -14,11 +12,13 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		if (args.length > 0) {
-			Street s = Street.makeBaltic();
+			IProperty s = Street.makeBaltic();
 			System.out.println(args[0] + " " + s);
 		} else {
 			System.out.println("no args");
 		}
 	}
+	
+	
 
 }
