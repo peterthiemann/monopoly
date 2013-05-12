@@ -11,19 +11,21 @@ import java.util.Queue;
  *
  */
 public class Game {
-	public Queue<Player> players;
-	public Player current; // not contained in players
-	public IField[] board;
-	public IDice dice;
+	private Queue<Player> players;
+	private Player current; // not contained in players
+	private IField[] board;
+	private IDice dice;
 	
-	public Queue<IActionCard> chanceCards;
-	public Queue<IActionCard> communityChestCards;
+	private Queue<IActionCard> chanceCards;
+	private Queue<IActionCard> communityChestCards;
 	
 	private static IField[] initBoard() {
 		IField[] b = new IField[Constants.BOARD_SIZE];
 		b[00] = null; // GO!
 		b[01] = Street.makeMediterranian();
 		b[03] = Street.makeBaltic();
+		b[37] = Street.makeParkPlace();
+		b[39] = Street.makeBoardWalk();
 		return b;
 	}
 

@@ -10,14 +10,10 @@ import java.util.Collection;
  *
  */
 public class Street extends AProperty {
-	final int[] rent;
-	final Group colorGroup;
+	private final int[] rent;
+	private final Group colorGroup;
 	
-	State state;
-	
-	
-
-	////////
+	private State state;
 	
 	public int[] getRent() {
 		return rent.clone();		// do not return the plain array!
@@ -63,6 +59,14 @@ public class Street extends AProperty {
 	
 	public static Street makeBaltic() {
 		return new Street("Baltic Avenue", 60, new int[] {0, 4, 20, 60, 180, 320, 450},	Group.SADDLEBROWN);
+	}
+	
+	public static Street makeParkPlace() {
+		return new Street("Park Place", 350, new int[] {0, 35, 175, 500, 1100, 1300, 1500}, Group.BLUE);
+	}
+	
+	public static Street makeBoardWalk() {
+		return new Street("Board Walk", 400, new int[] {0, 50, 200, 600, 1400, 1700, 2000}, Group.BLUE);
 	}
 	
 	public String toString() {

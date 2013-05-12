@@ -1,3 +1,6 @@
+* Street properties are private again
+* Utility did not implement IProperty
+---------------------------------
 * AProperty: default implementations for isRailroad and inColorGroup
 * IProperty: add flag isRailroad to distinguish railroads from other properties
 * Implementation of Railroads (mortgage handling still missing)
@@ -6,8 +9,8 @@
 * Refactoring Properties: pull up owner, name and price to an abstract AProperty superclass
 * Refactoring Actions: pull up descriptions to an AAction abstract superclass
 ---------------------------------
-* fixed Street.buyHouse(): Es k�nnen momentan H�user auf einer beliehenen Stra�e gebaut werden.
-* fixed Street.calculateRent(): Die Miete f�r Stra�en mit H�usern oder Hotel wird verdoppelt.
+* fixed Street.buyHouse(): Es koennen momentan Haeuser auf einer beliehenen Strasse gebaut werden.
+* fixed Street.calculateRent(): Die Miete fuer Strassen mit Haeusern oder Hotel wird verdoppelt.
 * StreetTest: tests implemented for above bugs 
 * IProperty: new method isMortgaged
 * Street: new factory method Mediterranian Street
