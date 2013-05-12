@@ -20,7 +20,7 @@ public class Street extends AProperty {
 	}
 
 	public int getMortgageValue() {
-		return price / 2;
+		return getPrice() / 2;
 	}
 
 	public int getHouseCost() {
@@ -70,7 +70,7 @@ public class Street extends AProperty {
 	}
 	
 	public String toString() {
-		return this.name + " " + this.colorGroup;
+		return this.getName() + " " + this.colorGroup;
 	}
 
 	/**
@@ -128,14 +128,14 @@ public class Street extends AProperty {
 	public IAction action(Player current, Collection<Player> others, IDice dice) {
 		if (this.state == State.UNOWNED) {
 			// offer to buy the street
-			return new BuyAction("Buy " + this.name + " for $" + this.price , current, this);
+			return new BuyAction("Buy " + this.getName() + " for $" + this.getPrice() , current, this);
 		} else {
 			// pay rent
 			if (current == this.owner) {
 				return null;
 			} else {
 				int amount = this.calculateRent();
-				return new PayToAction("Pay $" + amount + " rent for " + this.name + " to " + owner.getName(),
+				return new PayToAction("Pay $" + amount + " rent for " + this.getName() + " to " + owner.getName(),
 						current, this.owner, amount);
 			}
 		}

@@ -8,7 +8,7 @@ package monopoly;
  *
  */
 public abstract class AAction implements IAction {
-	protected final String description;
+	private final String description;
 	
 	protected AAction(String descr) {
 		this.description = descr;

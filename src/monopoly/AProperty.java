@@ -9,13 +9,13 @@ package monopoly;
  */
 public abstract class AProperty implements IField, IProperty {
 
+	private final String name;
+	private final int price;
+
 	/**
-	 * null as long as state == UNOWNED
-	 * not null otherwise
+	 * null iff !this.isOwned()
 	 */
 	protected Player owner;
-	protected String name;
-	protected int price;
 	
 	protected AProperty(String name, int price) {
 		this.name = name; this.price = price;
@@ -23,8 +23,24 @@ public abstract class AProperty implements IField, IProperty {
 
 
 	/**
-	 * Buy this street.
-	 * @return true if buying the street was successful.
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+
+	/**
+	 * @return the price
+	 */
+	protected int getPrice() {
+		return price;
+	}
+
+
+	/**
+	 * Buy this property.
+	 * @return true if buying the property was successful.
 	 */
 	public boolean buy(Player p) {
 		if ( !this.isOwned() && p.pay(this.price)) {
