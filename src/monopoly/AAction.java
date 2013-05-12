@@ -14,10 +14,6 @@ public abstract class AAction implements IAction {
 		this.description = descr;
 	}
 
-	public String myString() {
-		return "Hello World!";
-	}
-
 	@Override
 	public String getDescription() {
 		return this.description;
