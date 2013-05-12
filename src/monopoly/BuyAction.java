@@ -7,20 +7,14 @@ package monopoly;
  * @author thiemann
  *
  */
-public class BuyAction implements IAction {
-	private final String description;
+public class BuyAction extends AAction {
 	private final Player buyer;
 	private final Street street;
 
 	public BuyAction(String description, Player current, Street street) {
-		this.description = description;
+		super(description);
 		this.buyer = current;
 		this.street = street;
-	}
-
-	@Override
-	public String getDescription() {
-		return this.description;
 	}
 
 	@Override

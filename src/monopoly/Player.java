@@ -70,9 +70,6 @@ public class Player {
 		return this.jailState != JailState.FREE;
 	}
 
-	/**
-	 * @param inJail the inJail to set
-	 */
 	public void gotoJail() {
 		this.jailState = JailState.INJAIL;
 	}
@@ -116,6 +113,16 @@ public class Player {
 			}
 		}
 		return false;
+	}
+
+	public int countRailroads() {
+		int count = 0;
+		for (IProperty prop : this.ownedProperty) {
+			if (prop.isRailroad()) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 }

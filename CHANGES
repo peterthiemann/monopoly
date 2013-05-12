@@ -1,5 +1,13 @@
-* fixed Street.buyHouse(): Es kšnnen momentan HŠuser auf einer beliehenen Stra§e gebaut werden.
-* fixed Street.calculateRent(): Die Miete fŸr Stra§en mit HŠusern oder Hotel wird verdoppelt.
+* AProperty: default implementations for isRailroad and inColorGroup
+* IProperty: add flag isRailroad to distinguish railroads from other properties
+* Implementation of Railroads (mortgage handling still missing)
+* Skeleton for Utilities
+* Some tests for Railroads
+* Refactoring Properties: pull up owner, name and price to an abstract AProperty superclass
+* Refactoring Actions: pull up descriptions to an AAction abstract superclass
+---------------------------------
+* fixed Street.buyHouse(): Es kï¿½nnen momentan Hï¿½user auf einer beliehenen Straï¿½e gebaut werden.
+* fixed Street.calculateRent(): Die Miete fï¿½r Straï¿½en mit Hï¿½usern oder Hotel wird verdoppelt.
 * StreetTest: tests implemented for above bugs 
 * IProperty: new method isMortgaged
 * Street: new factory method Mediterranian Street
