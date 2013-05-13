@@ -14,6 +14,14 @@ public class Railroad extends AProperty {
 		return new Railroad("Reaching Railroad");
 	}
 
+	public static Railroad makeBAndO() {
+		return new Railroad("B&O Railroad");
+	}
+	
+	public static Railroad makeShortline() {
+		return new Railroad("Shortline Railroad");
+	}
+	
 	protected Railroad(String name) {
 		super(name, Constants.RAILROAD_PRICE);
 	}
@@ -45,7 +53,11 @@ public class Railroad extends AProperty {
 	@Override
 	protected int calculateRent() {
 		if (this.isOwned()) {
-			return Constants.RAILROAD_BASE_RENT * owner.countRailroads();
+			int result = Constants.RAILROAD_BASE_RENT;
+			for (int i = 1; i < owner.countRailroads(); i++) {
+				result *= 2;
+			}
+			return  result;
 		}
 		return 0;
 	}

@@ -9,6 +9,8 @@ public class RailroadTest {
 	
 	private Railroad rr_reaching;
 	private Railroad rr_penn;
+	private Railroad rr_bo;
+	private Railroad rr_short;
 	private Player p1;
 	private Player p2;
 	
@@ -17,6 +19,9 @@ public class RailroadTest {
 	public void setUp() {
 		rr_penn = Railroad.makePennsylvania();
 		rr_reaching = Railroad.makeReaching();
+		rr_bo = Railroad.makeBAndO();
+		rr_short = Railroad.makeShortline();
+		
 		p1 = new Player("Test1");
 		p2 = new Player("Test2");
 	}
@@ -39,10 +44,15 @@ public class RailroadTest {
 	@Test
 	public void testCalculateRent() {
 		assertTrue(rr_penn.buy(p1));
-		assertEquals(rr_penn.calculateRent(), Constants.RAILROAD_BASE_RENT);
+		assertEquals(25, rr_penn.calculateRent());
 		assertTrue(rr_reaching.buy(p1));
-		assertEquals(rr_penn.calculateRent(), 2*Constants.RAILROAD_BASE_RENT);
-		assertEquals(rr_reaching.calculateRent(), 2*Constants.RAILROAD_BASE_RENT);
+		assertEquals(50, rr_penn.calculateRent());
+		assertEquals(50, rr_reaching.calculateRent());
+		assertEquals(0, rr_bo.calculateRent());
+		assertTrue(rr_bo.buy(p1));
+		assertEquals(100, rr_bo.calculateRent());
+		assertTrue(rr_short.buy(p1));
+		assertEquals(200, rr_bo.calculateRent());
 	}
 
 	
