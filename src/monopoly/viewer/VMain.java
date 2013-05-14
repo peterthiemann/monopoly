@@ -5,18 +5,20 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
 import monopoly.Street;
 
 public class VMain {
@@ -43,7 +45,8 @@ public class VMain {
 
 	private static final int STREET_WIDTH = 200;
 	private static final int STREET_HEIGHT = 300;
-	private static final int HEADER_HEIGHT = 40;
+	private static final int STREET_HEADER_HEIGHT = 40;
+	private static final int STREET_FOOTER_HEIGHT = 30;
 
 	/**
 	 * @param args
@@ -111,23 +114,52 @@ public class VMain {
 		spane.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		
 		spane.add(makeStreetHeader(s));
+		spane.add(Box.createVerticalGlue());
+		spane.add(makeStreetFooter());
 		return spane;
 	}
 
 	private static Component makeStreetHeader(Street s) {
 		JPanel header = new JPanel(new BorderLayout());
-		header.setPreferredSize(new Dimension(STREET_WIDTH, HEADER_HEIGHT));
+		header.setPreferredSize(new Dimension(STREET_WIDTH, STREET_HEADER_HEIGHT));
 		header.setBackground(VGroup.getColor(s.getColorGroup()));
-		header.setMaximumSize(new Dimension(STREET_WIDTH, HEADER_HEIGHT));
+		header.setMaximumSize(new Dimension(STREET_WIDTH, STREET_HEADER_HEIGHT));
 		
 		JLabel line1 = new JLabel("TITLE DEED");
 		JLabel line2 = new JLabel(s.getName());
+		line1.setHorizontalAlignment(SwingConstants.CENTER);
+		line2.setHorizontalAlignment(SwingConstants.CENTER);
 		line1.setForeground(Color.WHITE);
 		line2.setForeground(Color.WHITE);
 		header.add(line1, BorderLayout.NORTH);
 		header.add(line2, BorderLayout.SOUTH);
 		
 		return header;
+	}
+
+	private static Component makeStreetFooter() {
+		Font smallfont = Font.decode("dialog-plain-6");
+		JPanel footerpane = new JPanel();
+		footerpane.setLayout(new BoxLayout(footerpane, BoxLayout.Y_AXIS));
+		footerpane.setBackground(Color.WHITE);
+		footerpane.setPreferredSize(new Dimension(STREET_WIDTH, STREET_FOOTER_HEIGHT));
+		footerpane.setMaximumSize(new Dimension(STREET_WIDTH, STREET_FOOTER_HEIGHT));
+		
+		String footer1 = "If a player owns ALL the lots of any Color-Group, the";
+		String footer2 = "rent is Doubled on Unimproved Lots in that group.";
+		JLabel footline1 = new JLabel(footer1);
+		JLabel footline2 = new JLabel(footer2);
+		footline1.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		footline2.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		footline1.setFont(smallfont);
+		footline2.setFont(smallfont);
+		footline1.setForeground(Color.BLACK);
+		footline2.setForeground(Color.BLACK);
+		footline1.setPreferredSize(new Dimension(STREET_WIDTH, STREET_FOOTER_HEIGHT/2));
+		footline2.setPreferredSize(new Dimension(STREET_WIDTH, STREET_FOOTER_HEIGHT/2));
+		footerpane.add(footline1);
+		footerpane.add(footline2);
+		return footerpane;
 	}
 
 }

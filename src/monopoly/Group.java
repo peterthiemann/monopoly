@@ -1,14 +1,16 @@
 package monopoly;
 
+import java.awt.Color;
+
 public enum Group {
-	SADDLEBROWN(2, 50),
-	SKYBLUE(3, 50),
-	DARKORCHID(3, 100),
-	ORANGE(3, 100),
-	RED(3, 150),
-	YELLOW(3, 150),
-	GREEN(3, 200),
-	BLUE(2, 200);
+	SADDLEBROWN(2,  50),
+	SKYBLUE    (3,  50),
+	DARKORCHID (3, 100),
+	ORANGE     (3, 100),
+	RED        (3, 150),
+	YELLOW     (3, 150),
+	GREEN      (3, 200),
+	BLUE       (2, 200);
 	
 	private final int nrInGroup;
 	private final int houseCost;

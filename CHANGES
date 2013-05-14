@@ -1,3 +1,5 @@
+* Swing GUI for displaying street cards
+---------------------------------
 * Street properties are private again
 * Utility did not implement IProperty
 ---------------------------------

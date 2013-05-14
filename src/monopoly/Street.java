@@ -61,6 +61,30 @@ public class Street extends AProperty {
 		return new Street("Baltic Avenue", 60, new int[] {0, 4, 20, 60, 180, 320, 450},	Group.SADDLEBROWN);
 	}
 	
+	public static Street makeOriental() {
+		return new Street("Oriental Avenue", 100, new int [] {0}, Group.SKYBLUE);
+	}
+	
+	public static Street makeVermont() {
+		return new Street("Vermont Avenue", 100, new int[] {0}, Group.SKYBLUE);
+	}
+	
+	public static Street makeConnecticut() {
+		return new Street("Connecticut Avenue", 120, new int[] {0}, Group.SKYBLUE);
+	}
+	
+	public static Street makeStCharles() {
+		return new Street("St. Charles Place", 140, new int[] {0}, Group.DARKORCHID);
+	}
+	
+	public static Street makeStates() {
+		return new Street("States Avenue", 140, new int[] {0}, Group.DARKORCHID);
+	}
+	
+	public static Street makeVirginia() {
+		return new Street("Virginia Avenue", 160, new int[] {0}, Group.DARKORCHID);
+	}
+	
 	public static Street makeParkPlace() {
 		return new Street("Park Place", 350, new int[] {0, 35, 175, 500, 1100, 1300, 1500}, Group.BLUE);
 	}
