@@ -4,21 +4,19 @@ import java.util.Collection;
 
 public class Railroad extends AProperty {
 
-	private RState state = RState.UNOWNED;
-
 	public static Railroad makePennsylvania() {
 		return new Railroad("Pennsylvania Railroad");
 	}
 
-	public static Railroad makeReaching() {
-		return new Railroad("Reaching Railroad");
+	public static Railroad makeReading() {
+		return new Railroad("Reading Railroad");
 	}
 
-	public static Railroad makeBAndO() {
+	public static Railroad makeBO() {
 		return new Railroad("B&O Railroad");
 	}
 	
-	public static Railroad makeShortline() {
+	public static Railroad makeShortLine() {
 		return new Railroad("Shortline Railroad");
 	}
 	
@@ -32,46 +30,27 @@ public class Railroad extends AProperty {
 		return null;
 	}
 
-
 	@Override
 	public boolean isMortgaged() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	protected boolean isOwned() {
-		return !RState.UNOWNED.equals(this.state);
-	}
-
 	@Override
-	protected void setOwnedState() {
-		if (this.state == RState.UNOWNED) {
-			this.state = RState.OWNED;
-		}
-	}
-
-	@Override
-	protected int calculateRent() {
+	public int calculateRent(ReadDice dice) {
+		int result = 0;
 		if (this.isOwned()) {
-			int result = Constants.RAILROAD_BASE_RENT;
+			result = Constants.RAILROAD_BASE_RENT;
 			for (int i = 1; i < owner.countRailroads(); i++) {
 				result *= 2;
 			}
-			return  result;
 		}
-		return 0;
+		return result;
 	}
-	
-	
 
 	@Override
 	public boolean isRailroad() {
-		// TODO Auto-generated method stub
 		return true;
-	}
-
-	public RState getState() {
-		return this.state;
 	}
 
 }

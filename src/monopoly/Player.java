@@ -125,4 +125,14 @@ public class Player {
 		return count;
 	}
 
+	public boolean ownsAllUtilities() {
+		int count = 0;
+		for (IProperty prop : this.ownedProperty) {
+			if (prop.isUtility()) {
+				count++;
+			}
+		}
+		return count == Constants.NR_OF_UTILITIES;
+	}
+
 }

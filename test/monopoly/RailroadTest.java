@@ -13,17 +13,21 @@ public class RailroadTest {
 	private Railroad rr_short;
 	private Player p1;
 	private Player p2;
+	private IDice the_dice;
 	
 	
 	@Before
 	public void setUp() {
 		rr_penn = Railroad.makePennsylvania();
-		rr_reaching = Railroad.makeReaching();
-		rr_bo = Railroad.makeBAndO();
-		rr_short = Railroad.makeShortline();
+		rr_reaching = Railroad.makeReading();
+		rr_bo = Railroad.makeBO();
+		rr_short = Railroad.makeShortLine();
 		
 		p1 = new Player("Test1");
 		p2 = new Player("Test2");
+		
+		the_dice = new TwoD6();
+		the_dice.roll();
 	}
 
 
@@ -34,7 +38,7 @@ public class RailroadTest {
 	public void testBuy() {
 		assertTrue(rr_reaching.buy(p1));
 		assertEquals("Player did not pay the right amount", -200, p1.getCash() - Constants.START_CASH);		
-		assertEquals(rr_reaching.getState(), RState.OWNED);
+		assertTrue("Railroad not bought", rr_reaching.isOwned());
 		assertFalse("Player could by owned railroad", rr_reaching.buy(p2));
 	}
 	
@@ -44,16 +48,15 @@ public class RailroadTest {
 	@Test
 	public void testCalculateRent() {
 		assertTrue(rr_penn.buy(p1));
-		assertEquals(25, rr_penn.calculateRent());
+		assertEquals(25, rr_penn.calculateRent(the_dice));
 		assertTrue(rr_reaching.buy(p1));
-		assertEquals(50, rr_penn.calculateRent());
-		assertEquals(50, rr_reaching.calculateRent());
-		assertEquals(0, rr_bo.calculateRent());
+		assertEquals(50, rr_penn.calculateRent(the_dice));
+		assertEquals(50, rr_reaching.calculateRent(the_dice));
+		assertEquals(0, rr_bo.calculateRent(the_dice));
 		assertTrue(rr_bo.buy(p1));
-		assertEquals(100, rr_bo.calculateRent());
+		assertEquals(100, rr_bo.calculateRent(the_dice));
 		assertTrue(rr_short.buy(p1));
-		assertEquals(200, rr_bo.calculateRent());
+		assertEquals(200, rr_bo.calculateRent(the_dice));
 	}
 
-	
 }

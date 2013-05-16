@@ -45,8 +45,7 @@ public abstract class AProperty implements IField, IProperty {
 	public boolean buy(Player p) {
 		if ( !this.isOwned() && p.pay(this.price)) {
 			/*this.state = State.OWNED;*/
-			this.setOwnedState();
-			this.owner = p;
+			this.setOwnedState(p);
 			p.addProperty(this);
 			return true;
 		} else {
@@ -54,16 +53,24 @@ public abstract class AProperty implements IField, IProperty {
 		}
 	}
 	
-	protected abstract boolean isOwned();
-	protected abstract void setOwnedState();
+	protected boolean isOwned() {
+		return this.owner != null;
+	}
+	protected void setOwnedState(Player p) {
+		this.owner = p;
+	}
 
-	protected abstract int calculateRent();
+	public abstract int calculateRent(ReadDice dice);
 	
 	public boolean inColorGroup(Group colorGroup) {
 		return false;
 	}
 	
 	public boolean isRailroad() {
+		return false;
+	}
+	
+	public boolean isUtility() {
 		return false;
 	}
 	

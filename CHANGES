@@ -1,3 +1,7 @@
+* clean up inheritance
+* all properties implemented
+* IProperty.calculateRent depends on dice
+---------------------------------
 * Swing GUI for displaying street cards
 ---------------------------------
 * Street properties are private again

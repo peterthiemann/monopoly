@@ -16,12 +16,15 @@ public class StreetTest {
 	
 	private Street s_med, s_bal;
 	private Player p;
+	private IDice the_dice;
 	
 	@Before 
 	public void setUp() {
 		s_med = Street.makeMediterranian();
 		s_bal = Street.makeBaltic();
 		p = new Player("TestPlayer Anton");
+		the_dice = new TwoD6();
+		the_dice.roll();
 	}
 
 	/**
@@ -50,18 +53,18 @@ public class StreetTest {
 	@Test
 	public void testCalculateRent() {
 		assertTrue(s_med.buy(p));
-		assertEquals(s_med.calculateRent(), 2);
+		assertEquals(s_med.calculateRent(the_dice), 2);
 		assertTrue(s_bal.buy(p));
-		assertEquals(s_bal.calculateRent(), 8);
+		assertEquals(s_bal.calculateRent(the_dice), 8);
 		assertTrue("should be able to mortgage empty street", s_bal.obtainMortgage());
-		assertEquals(s_bal.calculateRent(), 0);
-		assertEquals(s_med.calculateRent(), 4);
+		assertEquals(s_bal.calculateRent(the_dice), 0);
+		assertEquals(s_med.calculateRent(the_dice), 4);
 		assertFalse("should not be able to build on mortgaged property", s_bal.buyHouse());
 		assertFalse("should not be able to build if another street is mortgaged", s_med.buyHouse());
 		assertTrue("should have enough cash to release mortgage", s_bal.releaseMortgage());
-		assertEquals(s_bal.calculateRent(), 8);
+		assertEquals(s_bal.calculateRent(the_dice), 8);
 		assertTrue("should be able to build house", s_med.buyHouse());
-		assertEquals(s_med.calculateRent(), 10);
+		assertEquals(s_med.calculateRent(the_dice), 10);
 		// assertFalse("must build houses evenly", s_med.buyHouse());
 	}
 

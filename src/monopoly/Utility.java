@@ -3,31 +3,27 @@
  */
 package monopoly;
 
+import java.util.Collection;
+
 /**
  * @author adpult
  *
  */
-public class Utility implements IProperty {
-
-	public int calculateRent() {
-		return 0;
+public class Utility extends AProperty {
+	
+	protected Utility(String name, int price) {
+		super(name, price);
+	}
+	
+	public boolean isUtility() {
+		return true;
 	}
 
-	public boolean buy(Player p) {
-		return false;
-	}
-
-	public int getPrice() {
-		return 0;
-	}
-
-	public String getName() {
-		return null;
-	}
-
-	@Override
-	public boolean inColorGroup(Group colorGroup) {
-		return false;
+	public int calculateRent(ReadDice dice) {
+		if (!this.isOwned()) {
+			return 0;
+		}
+		return (this.owner.ownsAllUtilities() ? 10 : 4) * dice.getValue();
 	}
 
 	@Override
@@ -36,9 +32,18 @@ public class Utility implements IProperty {
 		return false;
 	}
 
+	public static Utility makeElectric() {
+		return new Utility("Electric Company", Constants.UTILITY_PRICE);
+	}
+
+	public static Utility makeWater() {
+		return new Utility("Water Works", Constants.UTILITY_PRICE);
+	}
+
 	@Override
-	public boolean isRailroad() {
-		return false;
+	public IAction action(Player current, Collection<Player> others, IDice dice) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

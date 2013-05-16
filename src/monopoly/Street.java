@@ -62,27 +62,75 @@ public class Street extends AProperty {
 	}
 	
 	public static Street makeOriental() {
-		return new Street("Oriental Avenue", 100, new int [] {0}, Group.SKYBLUE);
+		return new Street("Oriental Avenue", 100, new int [] {0, 6, 30, 90, 270, 400, 550}, Group.SKYBLUE);
 	}
 	
 	public static Street makeVermont() {
-		return new Street("Vermont Avenue", 100, new int[] {0}, Group.SKYBLUE);
+		return new Street("Vermont Avenue", 100, new int[] {0, 6, 30, 90, 270, 400, 550}, Group.SKYBLUE);
 	}
 	
 	public static Street makeConnecticut() {
-		return new Street("Connecticut Avenue", 120, new int[] {0}, Group.SKYBLUE);
+		return new Street("Connecticut Avenue", 120, new int[] {0, 8, 40, 100, 300, 450, 600}, Group.SKYBLUE);
 	}
 	
 	public static Street makeStCharles() {
-		return new Street("St. Charles Place", 140, new int[] {0}, Group.DARKORCHID);
+		return new Street("St. Charles Place", 140, new int[] {0, 10, 50, 150, 450, 625, 750}, Group.DARKORCHID);
 	}
 	
 	public static Street makeStates() {
-		return new Street("States Avenue", 140, new int[] {0}, Group.DARKORCHID);
+		return new Street("States Avenue", 140, new int[] {0, 10, 50, 150, 450, 625, 750}, Group.DARKORCHID);
 	}
 	
 	public static Street makeVirginia() {
-		return new Street("Virginia Avenue", 160, new int[] {0}, Group.DARKORCHID);
+		return new Street("Virginia Avenue", 160, new int[] {0, 12, 60, 180, 500, 700, 900}, Group.DARKORCHID);
+	}
+
+	public static Street makeStJames() {
+		return new Street("St. James Place", 180, new int[] {0, 14, 70, 200, 550, 750, 950}, Group.ORANGE);
+	}
+
+	public static Street makeTennessee() {
+		return new Street("Tennessee Avenue", 180, new int[] {0, 14, 70, 200, 550, 750, 950}, Group.ORANGE);
+	}
+
+	public static Street makeNewYork() {
+		return new Street("New York Avenue", 200, new int[] {0, 16, 80, 220, 600, 800, 1000}, Group.ORANGE);
+	}
+
+	public static Street makeKentucky() {
+		return new Street("Kentucky Avenue", 220, new int[] {0, 18, 90, 250, 700, 875, 1050}, Group.RED);
+	}
+
+	public static Street makeIndiana() {
+		return new Street("Indiana Avenue", 220, new int[] {0, 18, 90, 250, 700, 875, 1050}, Group.RED);
+	}
+
+	public static Street makeIllinois() {
+		return new Street("Illinois Avenue", 240, new int[] {0, 20, 100, 300, 750, 925, 1100}, Group.RED);
+	}
+
+	public static Street makeAtlantic() {
+		return new Street("Atlantic Avenue", 260, new int[] {0, 22, 110, 330, 800, 975, 1150}, Group.YELLOW);
+	}
+
+	public static Street makeVentnor() {
+		return new Street("Ventnor Avenue", 260, new int[] {0, 22, 110, 330, 800, 975, 1150}, Group.YELLOW);
+	}
+
+	public static Street makeMarvin() {
+		return new Street("Marvin Gardens", 280, new int[] {0, 24, 120, 360, 860, 1025, 1200}, Group.YELLOW);
+	}
+
+	public static Street makePacific() {
+		return new Street("Pacific Avenue", 300, new int[] {0, 26, 130, 390, 900, 1100, 1275}, Group.GREEN);
+	}
+
+	public static Street makeNorthCarolina() {
+		return new Street("North Carolina Avenue", 300, new int[] {0, 26, 130, 390, 900, 1100, 1275}, Group.GREEN);
+	}
+
+	public static Street makePennsylvania() {
+		return new Street("Pennsylvania Avenue", 320, new int[] {0, 28, 150, 450, 1000, 1200, 1400}, Group.GREEN);
 	}
 	
 	public static Street makeParkPlace() {
@@ -158,7 +206,7 @@ public class Street extends AProperty {
 			if (current == this.owner) {
 				return null;
 			} else {
-				int amount = this.calculateRent();
+				int amount = this.calculateRent(dice);
 				return new PayToAction("Pay $" + amount + " rent for " + this.getName() + " to " + owner.getName(),
 						current, this.owner, amount);
 			}
@@ -166,14 +214,10 @@ public class Street extends AProperty {
 	}
 
 	@Override
-	protected boolean isOwned() {
-		return !State.UNOWNED.equals(this.state);
-	}
-
-	@Override
-	protected void setOwnedState() {
+	protected void setOwnedState(Player p) {
 		if(this.state == State.UNOWNED) {
-			this.state = State.OWNED;	
+			this.state = State.OWNED;
+			super.setOwnedState(p);
 		}				
 	}
 	
@@ -182,7 +226,7 @@ public class Street extends AProperty {
 	 * @return the amount of rent.
 	 */
 	@Override
-	public int calculateRent() {
+	public int calculateRent(ReadDice dice) {
 		int amount = rent[this.state.getRentIndex()];
 		if (this.state == State.OWNED && owner.ownsAllInGroup(this.colorGroup)) {
 			amount *= 2;
