@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
@@ -121,20 +122,30 @@ public class VMain {
 
 	private static Component makeStreetHeader(Street s) {
 		JPanel header = new JPanel(new BorderLayout());
+		Color streetColor = VGroup.getColor(s.getColorGroup());
+		Color textColor = chooseColorForText(streetColor);
+
+		header.setBackground(streetColor);
 		header.setPreferredSize(new Dimension(STREET_WIDTH, STREET_HEADER_HEIGHT));
-		header.setBackground(VGroup.getColor(s.getColorGroup()));
 		header.setMaximumSize(new Dimension(STREET_WIDTH, STREET_HEADER_HEIGHT));
 		
 		JLabel line1 = new JLabel("TITLE DEED");
 		JLabel line2 = new JLabel(s.getName());
 		line1.setHorizontalAlignment(SwingConstants.CENTER);
 		line2.setHorizontalAlignment(SwingConstants.CENTER);
-		line1.setForeground(Color.WHITE);
-		line2.setForeground(Color.WHITE);
+		line1.setForeground(textColor);
+		line2.setForeground(textColor);
 		header.add(line1, BorderLayout.NORTH);
 		header.add(line2, BorderLayout.SOUTH);
 		
 		return header;
+	}
+
+	private static Color chooseColorForText(Color bgColor) {
+		// choose color for text based on luminance / gray value of background color
+		float[] components = bgColor.getColorComponents(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
+		float luminance = components[0];
+		return luminance > 0.5 ? Color.BLACK : Color.WHITE;
 	}
 
 	private static Component makeStreetFooter() {
