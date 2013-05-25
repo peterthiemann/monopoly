@@ -3,7 +3,6 @@
  */
 package monopoly;
 
-import java.util.Collection;
 
 /**
  * @author thiemann
@@ -61,83 +60,83 @@ public class Street extends AProperty {
 		return new Street("Baltic Avenue", 60, new int[] {0, 4, 20, 60, 180, 320, 450},	Group.SADDLEBROWN);
 	}
 	
-	public static Street makeOriental() {
+	public static AProperty makeOriental() {
 		return new Street("Oriental Avenue", 100, new int [] {0, 6, 30, 90, 270, 400, 550}, Group.SKYBLUE);
 	}
 	
-	public static Street makeVermont() {
+	public static AProperty makeVermont() {
 		return new Street("Vermont Avenue", 100, new int[] {0, 6, 30, 90, 270, 400, 550}, Group.SKYBLUE);
 	}
 	
-	public static Street makeConnecticut() {
+	public static AProperty makeConnecticut() {
 		return new Street("Connecticut Avenue", 120, new int[] {0, 8, 40, 100, 300, 450, 600}, Group.SKYBLUE);
 	}
 	
-	public static Street makeStCharles() {
+	public static AProperty makeStCharles() {
 		return new Street("St. Charles Place", 140, new int[] {0, 10, 50, 150, 450, 625, 750}, Group.DARKORCHID);
 	}
 	
-	public static Street makeStates() {
+	public static AProperty makeStates() {
 		return new Street("States Avenue", 140, new int[] {0, 10, 50, 150, 450, 625, 750}, Group.DARKORCHID);
 	}
 	
-	public static Street makeVirginia() {
+	public static AProperty makeVirginia() {
 		return new Street("Virginia Avenue", 160, new int[] {0, 12, 60, 180, 500, 700, 900}, Group.DARKORCHID);
 	}
 
-	public static Street makeStJames() {
+	public static AProperty makeStJames() {
 		return new Street("St. James Place", 180, new int[] {0, 14, 70, 200, 550, 750, 950}, Group.ORANGE);
 	}
 
-	public static Street makeTennessee() {
+	public static AProperty makeTennessee() {
 		return new Street("Tennessee Avenue", 180, new int[] {0, 14, 70, 200, 550, 750, 950}, Group.ORANGE);
 	}
 
-	public static Street makeNewYork() {
+	public static AProperty makeNewYork() {
 		return new Street("New York Avenue", 200, new int[] {0, 16, 80, 220, 600, 800, 1000}, Group.ORANGE);
 	}
 
-	public static Street makeKentucky() {
+	public static AProperty makeKentucky() {
 		return new Street("Kentucky Avenue", 220, new int[] {0, 18, 90, 250, 700, 875, 1050}, Group.RED);
 	}
 
-	public static Street makeIndiana() {
+	public static AProperty makeIndiana() {
 		return new Street("Indiana Avenue", 220, new int[] {0, 18, 90, 250, 700, 875, 1050}, Group.RED);
 	}
 
-	public static Street makeIllinois() {
+	public static AProperty makeIllinois() {
 		return new Street("Illinois Avenue", 240, new int[] {0, 20, 100, 300, 750, 925, 1100}, Group.RED);
 	}
 
-	public static Street makeAtlantic() {
+	public static AProperty makeAtlantic() {
 		return new Street("Atlantic Avenue", 260, new int[] {0, 22, 110, 330, 800, 975, 1150}, Group.YELLOW);
 	}
 
-	public static Street makeVentnor() {
+	public static AProperty makeVentnor() {
 		return new Street("Ventnor Avenue", 260, new int[] {0, 22, 110, 330, 800, 975, 1150}, Group.YELLOW);
 	}
 
-	public static Street makeMarvin() {
+	public static AProperty makeMarvin() {
 		return new Street("Marvin Gardens", 280, new int[] {0, 24, 120, 360, 860, 1025, 1200}, Group.YELLOW);
 	}
 
-	public static Street makePacific() {
+	public static AProperty makePacific() {
 		return new Street("Pacific Avenue", 300, new int[] {0, 26, 130, 390, 900, 1100, 1275}, Group.GREEN);
 	}
 
-	public static Street makeNorthCarolina() {
+	public static AProperty makeNorthCarolina() {
 		return new Street("North Carolina Avenue", 300, new int[] {0, 26, 130, 390, 900, 1100, 1275}, Group.GREEN);
 	}
 
-	public static Street makePennsylvania() {
+	public static AProperty makePennsylvania() {
 		return new Street("Pennsylvania Avenue", 320, new int[] {0, 28, 150, 450, 1000, 1200, 1400}, Group.GREEN);
 	}
 	
-	public static Street makeParkPlace() {
+	public static AProperty makeParkPlace() {
 		return new Street("Park Place", 350, new int[] {0, 35, 175, 500, 1100, 1300, 1500}, Group.BLUE);
 	}
 	
-	public static Street makeBoardWalk() {
+	public static AProperty makeBoardWalk() {
 		return new Street("Board Walk", 400, new int[] {0, 50, 200, 600, 1400, 1700, 2000}, Group.BLUE);
 	}
 	
@@ -194,23 +193,6 @@ public class Street extends AProperty {
 	@Override
 	public boolean inColorGroup(Group colorGroup) {
 		return this.getColorGroup() == colorGroup;
-	}
-
-	@Override
-	public IAction action(Player current, Collection<Player> others, IDice dice) {
-		if (this.state == State.UNOWNED) {
-			// offer to buy the street
-			return new BuyAction("Buy " + this.getName() + " for $" + this.getPrice() , current, this);
-		} else {
-			// pay rent
-			if (current == this.owner) {
-				return null;
-			} else {
-				int amount = this.calculateRent(dice);
-				return new PayToAction("Pay $" + amount + " rent for " + this.getName() + " to " + owner.getName(),
-						current, this.owner, amount);
-			}
-		}
 	}
 
 	@Override

@@ -3,8 +3,6 @@
  */
 package monopoly;
 
-import java.util.Collection;
-
 /**
  * @author adpult
  *
@@ -38,12 +36,6 @@ public class Utility extends AProperty {
 
 	public static Utility makeWater() {
 		return new Utility("Water Works", Constants.UTILITY_PRICE);
-	}
-
-	@Override
-	public IAction action(Player current, Collection<Player> others, IDice dice) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

@@ -8,7 +8,7 @@ public interface IField {
 	 * @param current player whose turn it is
 	 * @param others  players who are just watching
 	 * @param dice
-	 * @return the IAction that has to be taken or null if no action necessary
+	 * @return the IAction that has to be taken
 	 */
 	public IAction action(Player current, Collection<Player> others, IDice dice);
 }

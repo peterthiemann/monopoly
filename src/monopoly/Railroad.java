@@ -1,7 +1,5 @@
 package monopoly;
 
-import java.util.Collection;
-
 public class Railroad extends AProperty {
 
 	public static Railroad makePennsylvania() {
@@ -22,12 +20,6 @@ public class Railroad extends AProperty {
 	
 	protected Railroad(String name) {
 		super(name, Constants.RAILROAD_PRICE);
-	}
-
-	@Override
-	public IAction action(Player current, Collection<Player> others, IDice dice) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

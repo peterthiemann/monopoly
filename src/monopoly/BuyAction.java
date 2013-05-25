@@ -9,9 +9,9 @@ package monopoly;
  */
 public class BuyAction extends AAction {
 	private final Player buyer;
-	private final Street street;
+	private final AProperty street;
 
-	public BuyAction(String description, Player current, Street street) {
+	public BuyAction(String description, Player current, AProperty street) {
 		super(description);
 		this.buyer = current;
 		this.street = street;

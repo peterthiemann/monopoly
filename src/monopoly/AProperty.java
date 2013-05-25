@@ -3,6 +3,8 @@
  */
 package monopoly;
 
+import java.util.Collection;
+
 /**
  * @author adpult
  *
@@ -21,7 +23,6 @@ public abstract class AProperty implements IField, IProperty {
 		this.name = name; this.price = price;
 	}
 
-
 	/**
 	 * @return the name
 	 */
@@ -33,7 +34,7 @@ public abstract class AProperty implements IField, IProperty {
 	/**
 	 * @return the price
 	 */
-	protected int getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
@@ -72,6 +73,27 @@ public abstract class AProperty implements IField, IProperty {
 	
 	public boolean isUtility() {
 		return false;
+	}
+
+	@Override
+	public IAction action(Player current, Collection<Player> others, IDice dice) {
+		if (!this.isOwned()) {
+			// offer to buy the property
+			return new BuyAction("Buy " + this.getName() + " for $" + this.getPrice() , current, this);
+		} else {
+			// pay rent
+			if (current == this.owner) {
+				return NoAction.getInstance();
+			} else {
+				int amount = this.calculateRent(dice);
+				if (amount>0) {
+					return new PayToAction("Pay $" + amount + " rent for " + this.getName() + " to " + owner.getName(),
+							current, this.owner, amount);
+				} else {
+					return NoAction.getInstance();
+				}
+			}
+		}
 	}
 	
 

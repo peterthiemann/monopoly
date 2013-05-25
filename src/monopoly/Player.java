@@ -17,7 +17,7 @@ public class Player {
 	private Collection<IProperty> ownedProperty;
 	private Collection<IActionCard> cards;
 	
-	public JailState jailState;
+	private JailState jailState;
 	
 	public Player(String name) {
 		this.name = name;
@@ -64,6 +64,13 @@ public class Player {
 	}
 
 	/**
+	 * @return the jailState
+	 */
+	public JailState getJailState() {
+		return jailState;
+	}
+
+	/**
 	 * @return the inJail
 	 */
 	public boolean isInJail() {
@@ -76,6 +83,10 @@ public class Player {
 
 	public void addProperty(IProperty prop) {
 		this.ownedProperty.add(prop);
+	}
+	
+	public boolean ownsProperty(IProperty prop) {
+		return this.ownedProperty.contains(prop);
 	}
 	
 	public boolean earn(int amount) {
