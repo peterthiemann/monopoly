@@ -11,4 +11,14 @@ public interface IAction {
 	 * @return true if execution was successful
 	 */
 	public boolean execute();
+	/**
+	 * 
+	 * @return true if execute() must run successfully before finishing turn
+	 */
+	public boolean isRequired();
+	/**
+	 * 
+	 * @return 0 if no movement; otherwise difference to target, positive differences may pass GO, negative ones do not
+	 */
+	public int movement();
 }

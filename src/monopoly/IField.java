@@ -11,4 +11,6 @@ public interface IField {
 	 * @return the IAction that has to be taken
 	 */
 	public IAction action(Player current, Collection<Player> others, IDice dice);
+
+	public String getName();
 }

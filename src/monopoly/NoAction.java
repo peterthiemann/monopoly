@@ -1,8 +1,10 @@
 package monopoly;
 
-public class NoAction implements IAction {
+public class NoAction extends AAction {
 	
-	private NoAction() {}
+	private NoAction() {
+		super("no action");
+	}
 	
 	private static NoAction theInstance = new NoAction();
 	
@@ -11,12 +13,11 @@ public class NoAction implements IAction {
 	}
 
 	@Override
-	public String getDescription() {
-		return "no action";
-	}
-
-	@Override
 	public boolean execute() {
+		return true;
+	}
+	
+	public boolean isRequired() {
 		return true;
 	}
 

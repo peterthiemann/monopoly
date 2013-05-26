@@ -18,4 +18,12 @@ public abstract class AAction implements IAction {
 	public String getDescription() {
 		return this.description;
 	}
+	
+	public boolean isRequired() {
+		return false;
+	}
+	
+	public int movement() {
+		return 0;
+	}
 }
