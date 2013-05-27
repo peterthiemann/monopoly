@@ -1,3 +1,5 @@
+* lifted mortgage handling to AProperty
+---------------------------------
 * clean up inheritance
 * all properties implemented
 * IProperty.calculateRent depends on dice

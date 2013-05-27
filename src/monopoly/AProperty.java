@@ -13,6 +13,11 @@ public abstract class AProperty implements IField, IProperty {
 
 	private final String name;
 	private final int price;
+	
+	/**
+	 * mortgaged implies this.isOwned()
+	 */
+	private boolean mortgaged;
 
 	/**
 	 * null iff !this.isOwned()
@@ -45,7 +50,6 @@ public abstract class AProperty implements IField, IProperty {
 	 */
 	public boolean buy(Player p) {
 		if ( !this.isOwned() && p.pay(this.price)) {
-			/*this.state = State.OWNED;*/
 			this.setOwnedState(p);
 			p.addProperty(this);
 			return true;
@@ -96,5 +100,37 @@ public abstract class AProperty implements IField, IProperty {
 		}
 	}
 	
+	public boolean isMortgaged() {
+		return this.mortgaged;
+	}
+	
+	public boolean obtainMortgage() {
+		if(!this.isOwned() || this.isMortgaged()) {
+			return false;
+		} else {
+			this.mortgaged = true;
+			this.owner.earn(this.getMortgageValue());
+			return true;
+		}
+	}
+	
+	public boolean releaseMortgage() {
+		if (this.isOwned() && this.isMortgaged() && this.owner.pay(this.getMortgageReleaseAmount())) {
+			this.mortgaged = false;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	protected int getMortgageValue() {
+		return getPrice() / 2;
+	}
+
+	protected int getMortgageReleaseAmount() {
+		int amount = this.getMortgageValue();
+		amount += amount / 10;
+		return amount;
+	}
 
 }

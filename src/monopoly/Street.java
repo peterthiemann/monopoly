@@ -18,10 +18,6 @@ public class Street extends AProperty {
 		return rent.clone();		// do not return the plain array!
 	}
 
-	public int getMortgageValue() {
-		return getPrice() / 2;
-	}
-
 	public int getHouseCost() {
 		return this.colorGroup.getHouseCost();
 	}
@@ -165,12 +161,6 @@ public class Street extends AProperty {
 		} else {
 			return false;
 		}
-	}
-
-	private int getMortgageReleaseAmount() {
-		int amount = this.getMortgageValue();
-		amount += amount / 10;
-		return amount;
 	}
 
 	/**

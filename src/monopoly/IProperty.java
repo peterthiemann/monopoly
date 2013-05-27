@@ -3,6 +3,10 @@ package monopoly;
 public interface IProperty {
 	
 	public int calculateRent(ReadDice dice);
+	
+	public boolean obtainMortgage();
+	
+	public boolean releaseMortgage();
 
 	public boolean inColorGroup(Group colorGroup);
 
