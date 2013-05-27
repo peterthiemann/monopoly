@@ -5,6 +5,7 @@ public class Constants {
 	public final static int BOARD_SIZE = 40;
 	public final static int START_POSITION = 0;
 	public static final int JAIL_POSITION = 10;
+	public static final int ST_CHARLES_POSITION = 11;
 	public static final int ELECTRIC_POSITION = 12;
 	public static final int ILLINOIS_POSITION = 24;
 	public static final int WATER_POSITION = 28;

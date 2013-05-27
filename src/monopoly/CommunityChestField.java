@@ -1,6 +1,6 @@
 package monopoly;
 
-import java.util.Collection;
+import monopoly.actioncard.AdvanceTo;
 
 public class CommunityChestField extends AActionCardField {
 
@@ -36,6 +36,7 @@ public class CommunityChestField extends AActionCardField {
 	private static CommunityChestField init() {
 		IActionCard[] cards = new IActionCard[Constants.NR_COMMUNITY_CHEST_CARDS];
 		// TODO create cards
+		cards[ 0] = new AdvanceTo("Advance to Go (Collect $200)", Constants.START_POSITION);
 		// TODO shuffle cards
 		return new CommunityChestField(cards);
 	}

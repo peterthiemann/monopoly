@@ -12,7 +12,7 @@ public abstract class AActionCardField implements IField {
 		this.name = name;
 		this.cards = new LinkedList<IActionCard>();
 		for (IActionCard c : cards) {
-			this.cards.add(c);
+			if (c != null) this.cards.add(c);  // as long as some cards are not yet defined
 		}
 	}
 

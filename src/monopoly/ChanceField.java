@@ -2,7 +2,10 @@ package monopoly;
 
 import java.util.Collection;
 
+import monopoly.actioncard.AdvanceTo;
+
 public class ChanceField extends AActionCardField {
+	
 	private ChanceField(IActionCard[] cards) {
 		super("Chance", cards);
 	}
@@ -36,46 +39,8 @@ public class ChanceField extends AActionCardField {
 	private static ChanceField init() {
 		IActionCard[] cards = new IActionCard[Constants.NR_CHANCE_CARDS];
 		
-		cards[ 0] = new AActionCard("Advance to Go (Collect $200)") {
-
-			@Override
-			public IAction action(final Player current, Collection<Player> others, IDice dice) {
-				return new AAction(this.description, true) {
-
-					@Override
-					public boolean execute() {
-						return true;
-					}
-					
-					public int movement() {
-						return Constants.BOARD_SIZE - current.getPosition();
-					}
-					
-				};
-			}
-			
-		};
-		
-		cards[ 1] = new AActionCard("Advance to Illinois Ave.") {
-
-			@Override
-			public IAction action(final Player current, Collection<Player> others,
-					IDice dice) {
-				return new AAction(this.description, true) {
-
-					@Override
-					public boolean execute() {
-						return true;
-					}
-					
-					public int movement() {
-						return Constants.ILLINOIS_POSITION - current.getPosition() + Constants.BOARD_SIZE;
-					}
-					
-				};
-			}
-			
-		};
+		cards[ 0] = new AdvanceTo("Advance to Go (Collect $200)", Constants.START_POSITION);
+		cards[ 1] = new AdvanceTo("Advance to Illinois Ave.", Constants.ILLINOIS_POSITION);
 		
 		cards[ 2] = new AActionCard("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times the amount thrown.") {
 
@@ -107,6 +72,7 @@ public class ChanceField extends AActionCardField {
 					}
 			
 		};
+		cards[ 4] = new AdvanceTo("Advance to St. Charles Place - if you pass Go, collect $200", Constants.ST_CHARLES_POSITION);
 		// shuffle cards
 		return new ChanceField(cards);
 	}
