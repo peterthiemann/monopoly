@@ -4,7 +4,7 @@ public class PayAction extends AAction {
 	private final Player current;
 	private final int amount;
 	public PayAction(String description, Player current, int amount) {
-		super(description);
+		super(description, false);
 		this.current = current; this.amount = amount;
 	}
 	@Override

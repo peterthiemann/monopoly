@@ -12,7 +12,7 @@ public class BuyAction extends AAction {
 	private final AProperty street;
 
 	public BuyAction(String description, Player current, AProperty street) {
-		super(description);
+		super(description, false);
 		this.buyer = current;
 		this.street = street;
 	}

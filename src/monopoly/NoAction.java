@@ -3,7 +3,7 @@ package monopoly;
 public class NoAction extends AAction {
 	
 	private NoAction() {
-		super("no action");
+		super("no action", false);
 	}
 	
 	private static NoAction theInstance = new NoAction();

@@ -1,5 +1,7 @@
 package monopoly;
 
-public interface IActionCard {
+import java.util.Collection;
 
+public interface IActionCard {
+	public IAction action (Player current, Collection<Player> others, IDice dice);
 }

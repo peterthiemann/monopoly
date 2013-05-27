@@ -16,9 +16,6 @@ public class Game {
 	private IField[] board;
 	private IDice dice;
 	
-	private Queue<IActionCard> chanceCards;
-	private Queue<IActionCard> communityChestCards;
-	
 	public IField getField(int position) {
 		return board[position];
 	}
@@ -27,12 +24,12 @@ public class Game {
 		IField[] b = new IField[Constants.BOARD_SIZE];
 		b[ 0] = new GoField(); // GO!
 		b[ 1] = Street.makeMediterranian();
-		//b[ 2] = CommunityChestField.getInstance();
+		b[ 2] = CommunityChestField.getInstance();
 		b[ 3] = Street.makeBaltic();
 		b[ 4] = new IncomeTaxField();
 		b[ 5] = Railroad.makeReading();
 		b[ 6] = Street.makeOriental();
-		//b[ 7] = ChanceField.getInstance();
+		b[ 7] = ChanceField.getInstance();
 		b[ 8] = Street.makeVermont();
 		b[ 9] = Street.makeConnecticut();
 		b[10] = new JailField();
@@ -42,12 +39,12 @@ public class Game {
 		b[14] = Street.makeVirginia();
 		b[15] = Railroad.makePennsylvania();
 		b[16] = Street.makeStJames();
-		//b[17] = CommunityChestField.getInstance();
+		b[17] = CommunityChestField.getInstance();
 		b[18] = Street.makeTennessee();
 		b[19] = Street.makeNewYork();
 		b[20] =	new FreeParkingField();
 		b[21] = Street.makeKentucky();
-		//b[22] = ChanceField.getInstance();
+		b[22] = ChanceField.getInstance();
 		b[23] = Street.makeIndiana();
 		b[24] = Street.makeIllinois();
 		b[25] = Railroad.makeBO();
@@ -58,10 +55,10 @@ public class Game {
 		b[30] = new GotoJailField();
 		b[31] = Street.makePacific();
 		b[32] = Street.makeNorthCarolina();
-		//b[33] = CommunityChestField.getInstance();
+		b[33] = CommunityChestField.getInstance();
 		b[34] = Street.makePennsylvania();
 		b[35] = Railroad.makeShortLine();
-		//b[36] = ChanceField.getInstance();
+		b[36] = ChanceField.getInstance();
 		b[37] = Street.makeParkPlace();
 		b[38] = new LuxuryTaxField();
 		b[39] = Street.makeBoardWalk();

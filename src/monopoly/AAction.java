@@ -9,9 +9,11 @@ package monopoly;
  */
 public abstract class AAction implements IAction {
 	private final String description;
+	private final boolean required;
 	
-	protected AAction(String descr) {
+	protected AAction(String descr, boolean required) {
 		this.description = descr;
+		this.required = required;
 	}
 
 	@Override
@@ -20,7 +22,7 @@ public abstract class AAction implements IAction {
 	}
 	
 	public boolean isRequired() {
-		return false;
+		return required;
 	}
 	
 	public int movement() {

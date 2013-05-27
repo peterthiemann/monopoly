@@ -7,7 +7,7 @@ public class PayToAction extends AAction {
 
 	public PayToAction(String description, Player current, Player target,
 			int amount) {
-		super(description);
+		super(description, false);
 		this.current = current;
 		this.target = target;
 		this.amount = amount;

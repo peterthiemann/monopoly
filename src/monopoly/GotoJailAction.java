@@ -5,7 +5,7 @@ public class GotoJailAction extends AAction {
 	private Player current;
 
 	protected GotoJailAction(String descr, Player current) {
-		super(descr);
+		super(descr, false);
 		this.current = current;
 	}
 
