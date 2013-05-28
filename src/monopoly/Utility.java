@@ -9,7 +9,7 @@ package monopoly;
  */
 public class Utility extends AProperty {
 	
-	protected Utility(String name, int price) {
+	private Utility(String name, int price) {
 		super(name, price);
 	}
 	
@@ -21,7 +21,7 @@ public class Utility extends AProperty {
 		if (!this.isOwned()) {
 			return 0;
 		}
-		return (this.owner.ownsAllUtilities() ? 10 : 4) * dice.getValue();
+		return (this.getOwner().ownsAllUtilities() ? 10 : 4) * dice.getValue();
 	}
 
 	@Override

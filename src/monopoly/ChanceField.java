@@ -3,6 +3,7 @@ package monopoly;
 import java.util.Collection;
 
 import monopoly.actioncard.AdvanceTo;
+import monopoly.actioncard.EarnMoney;
 
 public class ChanceField extends AActionCardField {
 	
@@ -42,7 +43,8 @@ public class ChanceField extends AActionCardField {
 		cards[ 0] = new AdvanceTo("Advance to Go (Collect $200)", Constants.START_POSITION);
 		cards[ 1] = new AdvanceTo("Advance to Illinois Ave.", Constants.ILLINOIS_POSITION);
 		
-		cards[ 2] = new AActionCard("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times the amount thrown.") {
+		cards[ 2] = new AActionCard("Advance token to nearest Utility. If unowned, you may buy it from the Bank." +
+				" If owned, throw dice and pay owner a total ten times the amount thrown.") {
 
 					@Override
 					public IAction action(final Player current,
@@ -73,6 +75,8 @@ public class ChanceField extends AActionCardField {
 			
 		};
 		cards[ 4] = new AdvanceTo("Advance to St. Charles Place - if you pass Go, collect $200", Constants.ST_CHARLES_POSITION);
+		cards[ 5] = new EarnMoney("Bank pays you dividend of $50", 50);
+		cards[15] = new EarnMoney("You have won a crossword competition - collect $100", 100);
 		// shuffle cards
 		return new ChanceField(cards);
 	}

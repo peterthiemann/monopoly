@@ -33,7 +33,7 @@ public class Railroad extends AProperty {
 		int result = 0;
 		if (this.isOwned()) {
 			result = Constants.RAILROAD_BASE_RENT;
-			for (int i = 1; i < owner.countRailroads(); i++) {
+			for (int i = 1; i < getOwner().countRailroads(); i++) {
 				result *= 2;
 			}
 		}

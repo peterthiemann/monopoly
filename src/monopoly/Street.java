@@ -146,7 +146,7 @@ public class Street extends AProperty {
 	 */
 	public boolean obtainMortgage() {
 		if (this.state == State.OWNED) {
-			this.owner.earn(this.getMortgageValue());
+			this.getOwner().earn(this.getMortgageValue());
 			this.state = State.MORTGAGED;
 			return true;
 		} else {
@@ -155,7 +155,7 @@ public class Street extends AProperty {
 	}
 	
 	public boolean releaseMortgage() {
-		if (this.state == State.MORTGAGED && this.owner.pay(this.getMortgageReleaseAmount())) {
+		if (this.state == State.MORTGAGED && this.getOwner().pay(this.getMortgageReleaseAmount())) {
 			this.state = State.OWNED;
 			return true;
 		} else {
@@ -171,7 +171,7 @@ public class Street extends AProperty {
 	public boolean buyHouse() {
 		if (this.state == State.UNOWNED || this.state == State.HOTEL) {
 			return false;
-		} else if (!this.owner.ownsAllInGroup(this.colorGroup) || this.owner.anyMortgaged(this.colorGroup)) {
+		} else if (!this.getOwner().ownsAllInGroup(this.colorGroup) || this.getOwner().anyMortgaged(this.colorGroup)) {
 			return false;
 		} else {
 			int i = this.state.ordinal();
@@ -200,7 +200,7 @@ public class Street extends AProperty {
 	@Override
 	public int calculateRent(ReadDice dice) {
 		int amount = rent[this.state.getRentIndex()];
-		if (this.state == State.OWNED && owner.ownsAllInGroup(this.colorGroup)) {
+		if (this.state == State.OWNED && getOwner().ownsAllInGroup(this.colorGroup)) {
 			amount *= 2;
 		}
 		return amount;

@@ -2,7 +2,9 @@ package monopoly;
 
 public interface IProperty {
 	
-	public int calculateRent(ReadDice dice);
+	public int askRent(ReadDice dice);
+	
+	// public int calculateRent(ReadDice dice);
 	
 	public boolean obtainMortgage();
 	
