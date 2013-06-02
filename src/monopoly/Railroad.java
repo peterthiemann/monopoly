@@ -2,19 +2,19 @@ package monopoly;
 
 public class Railroad extends AProperty {
 
-	public static Railroad makePennsylvania() {
+	public static AProperty makePennsylvania() {
 		return new Railroad("Pennsylvania Railroad");
 	}
 
-	public static Railroad makeReading() {
+	public static AProperty makeReading() {
 		return new Railroad("Reading Railroad");
 	}
 
-	public static Railroad makeBO() {
+	public static AProperty makeBO() {
 		return new Railroad("B&O Railroad");
 	}
 	
-	public static Railroad makeShortLine() {
+	public static AProperty makeShortLine() {
 		return new Railroad("Shortline Railroad");
 	}
 	

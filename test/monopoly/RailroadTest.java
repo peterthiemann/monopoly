@@ -7,10 +7,10 @@ import org.junit.Test;
 
 public class RailroadTest {
 	
-	private Railroad rr_reaching;
-	private Railroad rr_penn;
-	private Railroad rr_bo;
-	private Railroad rr_short;
+	private AProperty rr_reaching;
+	private AProperty rr_penn;
+	private AProperty rr_bo;
+	private AProperty rr_short;
 	private Player p1;
 	private Player p2;
 	private IDice the_dice;

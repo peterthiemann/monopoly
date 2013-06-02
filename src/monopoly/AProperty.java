@@ -22,7 +22,7 @@ public abstract class AProperty implements IField, IProperty {
 	/**
 	 * null iff !this.isOwned()
 	 */
-	private Player owner;
+	protected Player owner;
 	
 	protected AProperty(String name, int price) {
 		this.name = name; this.price = price;
@@ -58,22 +58,25 @@ public abstract class AProperty implements IField, IProperty {
 		}
 	}
 	
-	protected boolean isOwned() {
+	public boolean isOwned() {
 		return this.owner != null;
 	}
 	protected void setOwnedState(Player p) {
 		this.owner = p;
 	}
 
-	public abstract int calculateRent(ReadDice dice); // hook method!
+	public abstract int calculateRent(ReadDice dice);
 	
-	final public int askRent(ReadDice dice) {
+
+	@Override
+	public int askRent(ReadDice dice) {
 		if (this.isMortgaged()) {
 			return 0;
 		} else {
 			return this.calculateRent(dice);
 		}
 	}
+
 	
 	public boolean inColorGroup(Group colorGroup) {
 		return false;
@@ -141,18 +144,8 @@ public abstract class AProperty implements IField, IProperty {
 		return amount;
 	}
 
-	/**
-	 * @return the owner
-	 */
 	public Player getOwner() {
-		return owner;
-	}
-
-	/**
-	 * @param owner the owner to set
-	 */
-	public void setOwner(Player owner) {
-		this.owner = owner;
+		return this.owner;
 	}
 
 }
