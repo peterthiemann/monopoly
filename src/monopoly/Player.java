@@ -5,6 +5,8 @@ package monopoly;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * @author thiemann
@@ -15,7 +17,7 @@ public class Player {
 	private int position;
 	private int cash;
 	private Collection<IProperty> ownedProperty;
-	private Collection<IActionCard> cards;
+	private Queue<IActionCard> cards;
 	
 	private JailState jailState;
 	
@@ -24,7 +26,7 @@ public class Player {
 		this.position = Constants.START_POSITION;
 		this.cash = Constants.START_CASH;
 		this.ownedProperty = new ArrayList<IProperty>();
-		this.cards = new ArrayList<IActionCard>();
+		this.cards = new LinkedList<IActionCard>();
 		this.jailState = JailState.FREE;
 	}
 
@@ -107,6 +109,15 @@ public class Player {
 		}
 	}
 
+	public boolean payto(Player obligee, int amount) {
+		if (this.pay(amount)) {
+			obligee.earn(amount);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public boolean ownsAllInGroup(Group colorGroup) {
 		int count = 0;
 		for (IProperty prop : this.ownedProperty) {
@@ -144,6 +155,37 @@ public class Player {
 			}
 		}
 		return count == Constants.NR_OF_UTILITIES;
+	}
+
+	public int numberOfHouses() {
+		int count = 0;
+		for (IProperty prop : this.ownedProperty) {
+			count += prop.numberOfHouses();
+		}
+		return count;
+	}
+	
+	public int numberOfHotels() {
+		int count = 0;
+		for (IProperty prop : this.ownedProperty) {
+			count += prop.numberOfHotels();
+		}
+		return count;
+	}
+
+	public void addCard(AActionCard aActionCard) {
+		this.cards.add(aActionCard);
+	}
+	
+	public boolean playGetOutOfJail() {
+		if (this.cards.isEmpty()) {
+			return false;
+		} else {
+			IActionCard ac = this.cards.poll();
+			ac.returnCard();
+			this.jailState = JailState.FREE;
+			return true;
+		}
 	}
 
 }

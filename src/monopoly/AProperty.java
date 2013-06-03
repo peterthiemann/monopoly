@@ -147,5 +147,13 @@ public abstract class AProperty implements IField, IProperty {
 	public Player getOwner() {
 		return this.owner;
 	}
+	
+	public int numberOfHouses() {
+		return 0;
+	}
+	
+	public int numberOfHotels() {
+		return 0;
+	}
 
 }

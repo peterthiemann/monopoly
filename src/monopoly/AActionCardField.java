@@ -19,12 +19,18 @@ public abstract class AActionCardField implements IField {
 	@Override
 	public IAction action(Player current, Collection<Player> others, IDice dice) {
 		IActionCard drawn = cards.poll();
-		return drawn.action(current, others, dice);
+		IAction action = drawn.action(current, others, dice);
+		if (!action.isGetOutOfJail()) cards.add(drawn);
+		return action;
 	}
 
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	public void returnCard(AActionCard aActionCard) {
+		cards.add(aActionCard);
 	}
 
 }

@@ -21,4 +21,5 @@ public interface IAction {
 	 * @return 0 if no movement; otherwise difference to target, positive differences may pass GO, negative ones do not
 	 */
 	public int movement();
+	public boolean isGetOutOfJail();
 }

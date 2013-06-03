@@ -18,4 +18,8 @@ public interface IProperty {
 
 	public boolean isUtility();
 
+	public int numberOfHouses();
+
+	public int numberOfHotels();
+
 }

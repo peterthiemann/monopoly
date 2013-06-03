@@ -28,4 +28,8 @@ public abstract class AAction implements IAction {
 	public int movement() {
 		return 0;
 	}
+	
+	public boolean isGetOutOfJail() {
+		return false;
+	}
 }

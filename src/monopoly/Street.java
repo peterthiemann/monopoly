@@ -205,4 +205,12 @@ public class Street extends AProperty {
 		}
 		return amount;
 	}
+	
+	public int numberOfHouses() {
+		return this.state.numberOfHouses();
+	}
+	
+	public int numberOfHotels() {
+		return this.state.numberOfHotels();
+	}
 }
