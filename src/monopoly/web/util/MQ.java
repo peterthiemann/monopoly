@@ -2,10 +2,11 @@ package monopoly.web.util;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class MQ<T> {
+public class MQ<T> implements IMQ<T> {
 	
 	private final LinkedBlockingQueue<T> q = new LinkedBlockingQueue<>();
 	
+	@Override
 	public T getNextRequest() {
 		try {
 			return q.take();
@@ -14,6 +15,7 @@ public class MQ<T> {
 		}
 	}
 	
+	@Override
 	public void submitRequest(T req) {
 		q.add(req);
 	}
