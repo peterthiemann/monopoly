@@ -31,6 +31,7 @@ public abstract class AProperty implements IField, IProperty {
 	/**
 	 * @return the name
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}

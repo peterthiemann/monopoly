@@ -1,9 +1,11 @@
 /** * */
 package monopoly;
 
+import monopoly.viewer.StringView;
+
 /**
  * @author adpult
- *
+ * 
  */
 public class Main {
 
@@ -11,14 +13,12 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		if (args.length > 0) {
-			IProperty s = Street.makeBaltic();
-			System.out.println(args[0] + " " + s);
-		} else {
-			System.out.println("no args");
+		Game game = new Game(new String[] { "Alfred", "Berta", "Chris"}, new TwoD6());
+		IDialog diag = new ConsoleDialog();
+		StringView view = new StringView(game);
+		while (true) {
+			System.out.println(view.stateDescr());
+			game.turn(diag);
 		}
 	}
-	
-	
-
 }
