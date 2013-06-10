@@ -4,18 +4,17 @@ import java.util.Collection;
 
 import monopoly.AAction;
 import monopoly.AActionCard;
+import monopoly.AActionCardField;
 import monopoly.ChanceField;
 import monopoly.IAction;
 import monopoly.IDice;
 import monopoly.Player;
 
 public final class GetOutOfJailFree extends AActionCard {
-	{
-		this.origin = ChanceField.getInstance();
-	}
 
-	public GetOutOfJailFree(String description) {
+	public GetOutOfJailFree(String description, AActionCardField field) {
 		super(description);
+		this.origin = field;
 	}
 
 	@Override

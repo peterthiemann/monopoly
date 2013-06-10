@@ -10,13 +10,15 @@ import monopoly.actioncard.PayToEachPlayer;
 
 public class ChanceField extends AActionCardField {
 	
-	private ChanceField(IActionCard[] cards) {
-		super("Chance", cards);
+	private ChanceField() {
+		super("Chance");
 	}
 	private static ChanceField instance;
 	public static ChanceField getInstance() {
 		if (instance == null) {
-			instance = init();
+			instance = new ChanceField();
+			IActionCard[] cards = init(instance);
+			instance.initCards(cards);
 		}
 		return instance;
 	}
@@ -40,7 +42,7 @@ public class ChanceField extends AActionCardField {
 	};
 
 
-	private static ChanceField init() {
+	private static IActionCard[] init(ChanceField instance) {
 		IActionCard[] cards = new IActionCard[Constants.NR_CHANCE_CARDS];
 		
 		cards[ 0] = new AdvanceTo("Advance to Go (Collect $200)", Constants.START_POSITION);
@@ -112,7 +114,7 @@ public class ChanceField extends AActionCardField {
 		};
 		cards[ 4] = new AdvanceTo("Advance to St. Charles Place - if you pass Go, collect $200", Constants.ST_CHARLES_POSITION);
 		cards[ 5] = new EarnMoney("Bank pays you dividend of $50", 50);
-		cards[ 6] = new GetOutOfJailFree("Get out of Jail free - this card may be kept until needed, or traded/sold");
+		cards[ 6] = new GetOutOfJailFree("Get out of Jail free - this card may be kept until needed, or traded/sold", instance);
 		cards[ 7] = new AActionCard("Go back 3 spaces") {
 
 			@Override
@@ -169,6 +171,6 @@ public class ChanceField extends AActionCardField {
 		cards[15] = new EarnMoney("You have won a crossword competition - collect $100", 100);
 		cards[16] = cards[ 3];
 		// shuffle cards
-		return new ChanceField(cards);
+		return cards;
 	}
 }

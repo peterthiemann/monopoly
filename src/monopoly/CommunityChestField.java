@@ -10,13 +10,15 @@ import monopoly.actioncard.PayMoney;
 
 public class CommunityChestField extends AActionCardField {
 
-	private CommunityChestField(IActionCard[] cards) {
-		super("Community Chest", cards);
+	private CommunityChestField() {
+		super("Community Chest");
 	}
 	private static CommunityChestField instance;
 	public static CommunityChestField getInstance() {
 		if (instance == null) {
-			instance = init();
+			instance = new CommunityChestField();
+			IActionCard[] cards = init(instance);
+			instance.initCards(cards);
 		}
 		return instance;
 	}
@@ -39,13 +41,13 @@ public class CommunityChestField extends AActionCardField {
 		"From sale of stock you get $50",
 		"Holiday Fund matures - Receive $100"
 	};
-	private static CommunityChestField init() {
+	private static IActionCard[] init(CommunityChestField field) {
 		IActionCard[] cards = new IActionCard[Constants.NR_COMMUNITY_CHEST_CARDS];
 		// TODO create cards
 		cards[ 0] = new AdvanceTo("Advance to Go (Collect $200)", Constants.START_POSITION);
 		cards[ 1] = new EarnMoney("Bank error in your favor - collect $75", 75);
 		cards[ 2] = new PayMoney("Doctor's fees - Pay $50", 50);
-		cards[ 3] = new GetOutOfJailFree("Get out of jail free - this card may be kept until needed, or sold");
+		cards[ 3] = new GetOutOfJailFree("Get out of jail free - this card may be kept until needed, or sold", field);
 		cards[ 4] = new AActionCard("Go to jail - go directly to jail - Do not pass Go, do not collect $200") {
 
 			@Override
@@ -86,7 +88,7 @@ public class CommunityChestField extends AActionCardField {
 		cards[15] = new EarnMoney("From sale of stock you get $50", 50);
 		cards[16] = new EarnMoney("Holiday Fund matures - Receive $100", 100);
 		// TODO shuffle cards
-		return new CommunityChestField(cards);
+		return cards;
 	}
 
 }

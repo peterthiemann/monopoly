@@ -8,9 +8,12 @@ public abstract class AActionCardField implements IField {
 	private final String name;
 	private final Queue<IActionCard> cards; 
 	
-	protected AActionCardField(String name, IActionCard[] cards) {
+	protected AActionCardField(String name) {
 		this.name = name;
 		this.cards = new LinkedList<IActionCard>();
+	}
+
+	protected void initCards(IActionCard[] cards) {
 		for (IActionCard c : cards) {
 			if (c != null) this.cards.add(c);  // as long as some cards are not yet defined
 		}
