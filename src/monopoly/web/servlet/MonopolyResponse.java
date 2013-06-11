@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import monopoly.web.util.MQ;
+import monopoly.web.util.IMQ;
 
 /**
  * Servlet implementation class MonopolyResponse
@@ -29,7 +29,7 @@ public class MonopolyResponse extends HttpServlet {
 				|| !Arrays.asList(GameRunner.PLAYER_NAMES).contains(name)) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
-			MQ<String> respQ = (MQ<String>) this.getServletContext()
+			IMQ<String> respQ = (IMQ<String>) this.getServletContext()
 					.getAttribute(GameRunner.respQName(name));
 			String r = respQ.getNextRequest();
 			response.getWriter().println(r);

@@ -45,8 +45,8 @@ public class MonopolySubmit extends HttpServlet {
 				}
 				
 				@Override
-				public ReadPlayer getPlayer() {
-					return new Player(name);
+				public String getPlayerName() {
+					return name;
 				}
 				
 				@Override

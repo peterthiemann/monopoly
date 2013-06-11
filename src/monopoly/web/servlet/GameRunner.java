@@ -18,9 +18,10 @@ public class GameRunner implements Runnable {
 	public static final String REQ_Q_NAME = "monopoly.reqQ";
 
 	private final Game game;
-	private final StringView view;
 	private final ServletContext ctxt;
 
+	private final StringView view; // new since 2013-06-04
+	
 	public static String respQName(String n) {
 		return "monopoly.resp." + n;
 	}
@@ -34,13 +35,14 @@ public class GameRunner implements Runnable {
 		}
 		// create the game
 		game = new Game(PLAYER_NAMES, new TwoD6());
+		
 		// and the view
 		view = new StringView(game);
 	}
 
 	@Override
 	public void run() {
-		updateState();
+		updateState(); // new since 2013-06-04
 		while (true) {
 			final ReadPlayer current = game.viewNextPlayer();
 			game.turn(new IDialog() {
@@ -61,7 +63,7 @@ public class GameRunner implements Runnable {
 					IMQ<GameRequest> q = (IMQ<GameRequest>)ctxt.getAttribute(REQ_Q_NAME);
 					while (true) {
 						GameRequest req = q.getNextRequest();
-						if (req.getPlayer().getName().equals(current.getName())) {
+						if (req.getPlayerName().equals(current.getName())) {
 						   return req.isYes();
 						}
 					}
@@ -74,7 +76,7 @@ public class GameRunner implements Runnable {
 				}
 
 			});
-			updateState();
+			updateState(); // new since 2013-06-04
 		}
 	}
 	

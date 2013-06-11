@@ -11,7 +11,7 @@ public interface GameRequest {
 	/**
 	 * @return The player that issues the request
 	 */
-	public ReadPlayer getPlayer();
+	public String getPlayerName();
 	
 	/**
 	 * @return The choice that the request represents

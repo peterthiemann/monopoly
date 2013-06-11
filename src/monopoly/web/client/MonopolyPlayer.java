@@ -46,24 +46,28 @@ public class MonopolyPlayer {
 		}
 	}
 
+	// Get a snapshot from the server
 	private void printState() throws IOException {
 		System.out.println(readUrl(stateUrl(), "GET"));
 	}
 
+	// Print messages until the server wants an answer
 	private void waitForQuestion() throws IOException {
 		String resp;
 		while (true) {
 			resp = readUrl(respUrl(), "POST");
-			if (resp.startsWith("UPDATE")) {
-				printState(); // print the state again
-			} else if (resp.startsWith("QUESTION")) {
+			if (resp.startsWith("QUESTION")) {
 				return; // we are finished waiting
+			} else  if (resp.startsWith("UPDATE")) {
+				printState(); // print the state again
 			} else {
 				System.out.print(" >>>> " + resp);
 			}
 		} 
 	}
 
+	
+	// Read an answer from the console and send it to the server
 	private void sendAnswer() throws MalformedURLException, IOException {
 		System.out.println(readUrl(submitUrl(in.nextLine()), "POST"));
 	}
