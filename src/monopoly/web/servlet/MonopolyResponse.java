@@ -1,6 +1,8 @@
 package monopoly.web.servlet;
 
 import java.io.IOException;
+import java.util.Arrays;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,17 +25,14 @@ public class MonopolyResponse extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getQueryString();
-		if (name == null) {
+		if (name == null
+				|| !Arrays.asList(GameRunner.PLAYER_NAMES).contains(name)) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
-			MQ<String> respQ = (MQ<String>)this.getServletContext().getAttribute(
-					GameRunner.respQName(name));
-			if (respQ == null) {
-				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			} else {
-				String r = respQ.getNextRequest();
-				response.getWriter().println(r);
-			}
+			MQ<String> respQ = (MQ<String>) this.getServletContext()
+					.getAttribute(GameRunner.respQName(name));
+			String r = respQ.getNextRequest();
+			response.getWriter().println(r);
 		}
 	}
 
