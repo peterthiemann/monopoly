@@ -20,6 +20,23 @@ public class MonopolyPlayer {
 	public MonopolyPlayer(String name) {
 		this.name = name;
 	}
+	
+	private URL respUrl() throws IOException {
+		return new URL("http://localhost:8080/Java2013git/MonopolyResponse?"
+				+ URLEncoder.encode(name, "UTF-8"));
+	}
+
+	private URL stateUrl() throws IOException {
+		return new URL("http://localhost:8080/Java2013git/MonopolySnapshot");
+	}
+
+	private URL submitUrl(String msg) throws MalformedURLException, IOException {
+		// Example: http://localhost:8080/Java2013git/MonopolySubmit?player=Alfred&submit=YES"
+		return new URL(
+				"http://localhost:8080/Java2013git/MonopolySubmit?player="
+						+ URLEncoder.encode(name, "UTF-8") + "&submit="
+						+ URLEncoder.encode(msg, "UTF-8"));
+	}
 
 	public void run() {
 		while (true) {
@@ -40,13 +57,16 @@ public class MonopolyPlayer {
 
 	private void waitForQuestion() throws IOException {
 		String resp;
-		do {
+		while (true) {
 			resp = readUrl(respUrl(), "POST");
-			System.out.print(" >>>> " + resp);
 			if (resp.startsWith("UPDATE")) {
-				printState();
+				printState(); // print the state again
+			} else if (resp.startsWith("QUESTION")) {
+				return; // we are finished waiting
+			} else {
+				System.out.print(" >>>> " + resp);
 			}
-		} while (!resp.startsWith("QUESTION:"));
+		} 
 	}
 
 	private void sendAnswer() throws MalformedURLException, IOException {
@@ -71,20 +91,5 @@ public class MonopolyPlayer {
 		return result.toString();
 	}
 
-	private URL respUrl() throws IOException {
-		return new URL("http://localhost:8080/Java2013git/MonopolyResponse?"
-				+ URLEncoder.encode(name, "UTF-8"));
-	}
-
-	private URL stateUrl() throws IOException {
-		return new URL("http://localhost:8080/Java2013git/MonopolySnapshot");
-	}
-
-	private URL submitUrl(String msg) throws MalformedURLException, IOException {
-		return new URL(
-				"http://localhost:8080/Java2013git/MonopolySubmit?player="
-						+ URLEncoder.encode(name, "UTF-8") + "&submit="
-						+ URLEncoder.encode(msg, "UTF-8"));
-	}
 
 }
