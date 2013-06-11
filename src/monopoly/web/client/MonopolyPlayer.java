@@ -9,11 +9,6 @@ import java.util.Scanner;
 
 public class MonopolyPlayer {
 
-	public static void main(String[] args) throws IOException {
-		String playerName = args[0];
-		new MonopolyPlayer(playerName).run();
-	}
-
 	private final String name;
 	private final Scanner in = new Scanner(System.in);
 
