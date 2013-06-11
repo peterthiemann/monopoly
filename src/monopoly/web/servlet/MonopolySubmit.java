@@ -28,14 +28,15 @@ public class MonopolySubmit extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// Example:
 		// http://localhost:8080/Java2013git/MonopolySubmit?player=Alfred&submit=YES"
-		final String name = request.getParameter("name");
+		final String name = request.getParameter("player");
 		final String submit = request.getParameter("submit");
 		if (name == null || submit == null
 				|| !Arrays.asList(GameRunner.PLAYER_NAMES).contains(name)) {
+			this.log("Bad Request: " + name + " " + submit);
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
 			MQ<GameRequest> q = (MQ<GameRequest>) this.getServletContext()
-					.getAttribute("monopoly.respQ");
+					.getAttribute(GameRunner.REQ_Q_NAME);
 			q.submitRequest(new GameRequest() {
 				
 				@Override

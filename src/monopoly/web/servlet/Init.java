@@ -14,12 +14,6 @@ public class Init implements ServletContextListener {
 	
 	private Thread worker;
 	
-    /**
-     * Default constructor. 
-     */
-    public Init() {
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
