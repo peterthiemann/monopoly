@@ -6,6 +6,7 @@ import monopoly.Game;
 import monopoly.IDialog;
 import monopoly.ReadPlayer;
 import monopoly.TwoD6;
+import monopoly.viewer.StringView;
 import monopoly.web.util.IMQ;
 import monopoly.web.util.MQ;
 
@@ -17,6 +18,7 @@ public class GameRunner implements Runnable {
 	public static final String REQ_Q_NAME = "monopoly.reqQ";
 
 	private final Game game;
+	private final StringView view;
 	private final ServletContext ctxt;
 
 	public static String respQName(String n) {
@@ -32,10 +34,13 @@ public class GameRunner implements Runnable {
 		}
 		// create the game
 		game = new Game(PLAYER_NAMES, new TwoD6());
+		// and the view
+		view = new StringView(game);
 	}
 
 	@Override
 	public void run() {
+		updateState();
 		while (true) {
 			final ReadPlayer current = game.viewNextPlayer();
 			game.turn(new IDialog() {
@@ -69,8 +74,18 @@ public class GameRunner implements Runnable {
 				}
 
 			});
+			updateState();
 		}
-
+	}
+	
+	private void updateState() {
+		// set the new state
+		ctxt.setAttribute("monopoly.state", view.stateDescr());
+		// notify players
+		for (String n : PLAYER_NAMES) {
+			MQ<String> q = (MQ<String>)ctxt.getAttribute(respQName(n));
+			q.submitRequest("UPDATE");
+		}
 	}
 
 }
