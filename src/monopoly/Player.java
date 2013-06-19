@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Collections;
 
 /**
  * @author thiemann
  *
  */
-public class Player {
+public class Player implements ReadPlayer {
 	private final String name;
 	private int position;
 	private int cash;
@@ -29,10 +30,11 @@ public class Player {
 		this.cards = new LinkedList<IActionCard>();
 		this.jailState = JailState.FREE;
 	}
-
+	
 	/**
 	 * @return the name
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -40,6 +42,7 @@ public class Player {
 	/**
 	 * @return the position
 	 */
+	@Override
 	public int getPosition() {
 		return position;
 	}
@@ -54,8 +57,17 @@ public class Player {
 	/**
 	 * @return the cash
 	 */
+	@Override
 	public int getCash() {
 		return cash;
+	}
+	
+	/**
+	 * @return A view of the player's owned properties.
+	 */
+	@Override
+	public Collection<ReadProperty> viewProperties() {
+		return new ArrayList<ReadProperty>(this.ownedProperty);
 	}
 
 	/**
@@ -68,6 +80,7 @@ public class Player {
 	/**
 	 * @return the jailState
 	 */
+	@Override
 	public JailState getJailState() {
 		return jailState;
 	}

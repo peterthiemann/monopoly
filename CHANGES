@@ -1,3 +1,7 @@
+* Add some pre-prepared classes for servlet lecture
+* Add a simple console main method
+* Create read-only views for game properties important for display
+---------------------------------
 * action cards: all community chest and all but two chance cards
 ---------------------------------
 * lifted mortgage handling to AProperty

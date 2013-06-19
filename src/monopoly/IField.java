@@ -2,7 +2,7 @@ package monopoly;
 
 import java.util.Collection;
 
-public interface IField {
+public interface IField extends ReadField {
 	/**
 	 * determine action to be taken by player arriving on field
 	 * @param current player whose turn it is
@@ -12,5 +12,4 @@ public interface IField {
 	 */
 	public IAction action(Player current, Collection<Player> others, IDice dice);
 
-	public String getName();
 }
