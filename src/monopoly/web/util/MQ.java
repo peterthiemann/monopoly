@@ -4,7 +4,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class MQ<T> implements IMQ<T> {
 	
-	private final LinkedBlockingQueue<T> q = new LinkedBlockingQueue<>();
+	private final LinkedBlockingQueue<T> q = new LinkedBlockingQueue<T>();
 	
 	@Override
 	public T getNextRequest() {
